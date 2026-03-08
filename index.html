@@ -977,54 +977,53 @@
         <div class="section-line"></div>
       </div>
 
-      <!-- R1+R2 Reference Table -->
+      <!-- Rp+Re Reference Table -->
       <div class="calc-card">
         <div class="card-head">
           <div class="card-title">
             <svg class="card-title-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
               <path d="M3 3h18v18H3zM3 9h18M3 15h18M9 3v18M15 3v18"/>
             </svg>
-            Copper Cable R1+R2 per Metre
+            Copper Cable Rp+Re per Metre
           </div>
         </div>
         <div class="card-desc">
-          Approximate R1+R2 values (m&Omega;/m) for flat twin &amp; earth copper cables at 20&deg;C. CPC sizes shown are the standard reduced earth for each line size.
+          Approximate Rp+Re values (m&Omega;/m) for copper cables at 20&deg;C. Earth conductor is the same size as the line conductor.
         </div>
 
         <div class="table-wrap">
           <div class="table-head">
-            <div class="table-label">Reference &mdash; Flat Twin &amp; Earth</div>
-            <div class="table-sub">IET On-Site Guide Table I1</div>
+            <div class="table-label">Reference &mdash; Copper Conductors</div>
+            <div class="table-sub">ET 101 / IS 10101</div>
           </div>
           <div class="table-divider"></div>
           <table class="ref-table">
             <thead>
               <tr>
-                <th>Line (mm&sup2;)</th>
-                <th>CPC (mm&sup2;)</th>
-                <th>R1 (m&Omega;/m)</th>
-                <th>R2 (m&Omega;/m)</th>
-                <th>R1+R2 (m&Omega;/m)</th>
+                <th>Cable (mm&sup2;)</th>
+                <th>Rp (m&Omega;/m)</th>
+                <th>Re (m&Omega;/m)</th>
+                <th>Rp+Re (m&Omega;/m)</th>
               </tr>
             </thead>
             <tbody>
-              <tr><td>1.0</td><td class="td-muted">1.0</td><td class="td-muted">18.10</td><td class="td-muted">18.10</td><td>36.20</td></tr>
-              <tr><td>1.5</td><td class="td-muted">1.0</td><td class="td-muted">12.10</td><td class="td-muted">18.10</td><td>30.20</td></tr>
-              <tr><td>2.5</td><td class="td-muted">1.5</td><td class="td-muted">7.41</td><td class="td-muted">12.10</td><td>19.51</td></tr>
-              <tr><td>4.0</td><td class="td-muted">1.5</td><td class="td-muted">4.61</td><td class="td-muted">12.10</td><td>16.71</td></tr>
-              <tr><td>6.0</td><td class="td-muted">2.5</td><td class="td-muted">3.08</td><td class="td-muted">7.41</td><td>10.49</td></tr>
-              <tr><td>10.0</td><td class="td-muted">4.0</td><td class="td-muted">1.83</td><td class="td-muted">4.61</td><td>6.44</td></tr>
-              <tr><td>16.0</td><td class="td-muted">6.0</td><td class="td-muted">1.15</td><td class="td-muted">3.08</td><td>4.23</td></tr>
+              <tr><td>1.0</td><td class="td-muted">18.10</td><td class="td-muted">18.10</td><td>36.20</td></tr>
+              <tr><td>1.5</td><td class="td-muted">12.10</td><td class="td-muted">12.10</td><td>24.20</td></tr>
+              <tr><td>2.5</td><td class="td-muted">7.41</td><td class="td-muted">7.41</td><td>14.82</td></tr>
+              <tr><td>4.0</td><td class="td-muted">4.61</td><td class="td-muted">4.61</td><td>9.22</td></tr>
+              <tr><td>6.0</td><td class="td-muted">3.08</td><td class="td-muted">3.08</td><td>6.16</td></tr>
+              <tr><td>10.0</td><td class="td-muted">1.83</td><td class="td-muted">1.83</td><td>3.66</td></tr>
+              <tr><td>16.0</td><td class="td-muted">1.15</td><td class="td-muted">1.15</td><td>2.30</td></tr>
             </tbody>
           </table>
         </div>
 
         <div class="text-tiny" style="margin-top: 0.55rem;">
-          Values at 20&deg;C. Multiply by 1.20 for conductor operating temperature correction (~70&deg;C) per BS 7671.
+          Values at 20&deg;C. Multiply by 1.20 for conductor operating temperature correction (~70&deg;C).
         </div>
       </div>
 
-      <!-- R1+R2 Calculator -->
+      <!-- Rp+Re Calculator -->
       <div class="calc-grid-full">
         <div class="calc-card">
           <div class="card-head">
@@ -1036,25 +1035,25 @@
                 <line x1="8" y1="14" x2="10" y2="14"/><line x1="14" y1="14" x2="16" y2="14"/>
                 <line x1="8" y1="18" x2="16" y2="18"/>
               </svg>
-              R1+R2 Calculator
+              Rp+Re Calculator
             </div>
             <button id="r1r2Clear" class="btn-clear" type="button">Clear</button>
           </div>
           <div class="card-desc">
-            Calculate total R1+R2 for a cable run. Select cable size, enter length, and optionally add Ze for full Zs.
+            Calculate total Rp+Re for a cable run. Select cable size, enter length, and optionally add Ze for full Zs.
           </div>
 
           <div class="input-grid-wide">
             <label class="field">
               <span class="field-label">Cable size (mm&sup2;)</span>
               <select id="r1r2Cable" class="select">
-                <option value="1.0">1.0 mm&sup2; (CPC 1.0)</option>
-                <option value="1.5" selected>1.5 mm&sup2; (CPC 1.0)</option>
-                <option value="2.5">2.5 mm&sup2; (CPC 1.5)</option>
-                <option value="4.0">4.0 mm&sup2; (CPC 1.5)</option>
-                <option value="6.0">6.0 mm&sup2; (CPC 2.5)</option>
-                <option value="10.0">10.0 mm&sup2; (CPC 4.0)</option>
-                <option value="16.0">16.0 mm&sup2; (CPC 6.0)</option>
+                <option value="1.0">1.0 mm&sup2;</option>
+                <option value="1.5" selected>1.5 mm&sup2;</option>
+                <option value="2.5">2.5 mm&sup2;</option>
+                <option value="4.0">4.0 mm&sup2;</option>
+                <option value="6.0">6.0 mm&sup2;</option>
+                <option value="10.0">10.0 mm&sup2;</option>
+                <option value="16.0">16.0 mm&sup2;</option>
               </select>
             </label>
 
@@ -1086,9 +1085,9 @@
             </div>
             <div class="readout-divider"></div>
             <div class="readout-grid-wide">
-              <div class="readout-row"><span class="readout-key">R1+R2 per metre</span><span class="readout-val" id="r1r2OutPerM">&mdash;</span></div>
-              <div class="readout-row"><span class="readout-key">R1+R2 total</span><span class="readout-val" id="r1r2OutTotal">&mdash;</span></div>
-              <div class="readout-row"><span class="readout-key">Zs (Ze + R1+R2)</span><span class="readout-val" id="r1r2OutZs">&mdash;</span></div>
+              <div class="readout-row"><span class="readout-key">Rp+Re per metre</span><span class="readout-val" id="r1r2OutPerM">&mdash;</span></div>
+              <div class="readout-row"><span class="readout-key">Rp+Re total</span><span class="readout-val" id="r1r2OutTotal">&mdash;</span></div>
+              <div class="readout-row"><span class="readout-key">Zs (Ze + Rp+Re)</span><span class="readout-val" id="r1r2OutZs">&mdash;</span></div>
             </div>
             <div class="readout-note" id="r1r2Formula"></div>
           </div>
@@ -1234,20 +1233,20 @@
     update();
   })();
 
-  // ── R1+R2 Calculator ───────────────────────────────
+  // ── Rp+Re Calculator ────────────────────────────────
   (function () {
     function $(id) { return document.getElementById(id); }
     function parseNum(v) { const s = String(v ?? "").trim().replaceAll(",", ""); if (!s) return null; const n = Number(s); return Number.isFinite(n) ? n : null; }
     function showMsg(el, msg) { if (!el) return; if (!msg) { el.hidden = true; el.textContent = ""; return; } el.hidden = false; el.textContent = msg; }
 
-    const R1R2_TABLE = {
-      "1.0":  { cpc: "1.0",  r1: 18.10, r2: 18.10, r1r2: 36.20 },
-      "1.5":  { cpc: "1.0",  r1: 12.10, r2: 18.10, r1r2: 30.20 },
-      "2.5":  { cpc: "1.5",  r1: 7.41,  r2: 12.10, r1r2: 19.51 },
-      "4.0":  { cpc: "1.5",  r1: 4.61,  r2: 12.10, r1r2: 16.71 },
-      "6.0":  { cpc: "2.5",  r1: 3.08,  r2: 7.41,  r1r2: 10.49 },
-      "10.0": { cpc: "4.0",  r1: 1.83,  r2: 4.61,  r1r2: 6.44  },
-      "16.0": { cpc: "6.0",  r1: 1.15,  r2: 3.08,  r1r2: 4.23  }
+    const RPRE_TABLE = {
+      "1.0":  { rp: 18.10, re: 18.10, rpre: 36.20 },
+      "1.5":  { rp: 12.10, re: 12.10, rpre: 24.20 },
+      "2.5":  { rp: 7.41,  re: 7.41,  rpre: 14.82 },
+      "4.0":  { rp: 4.61,  re: 4.61,  rpre: 9.22  },
+      "6.0":  { rp: 3.08,  re: 3.08,  rpre: 6.16  },
+      "10.0": { rp: 1.83,  re: 1.83,  rpre: 3.66  },
+      "16.0": { rp: 1.15,  re: 1.15,  rpre: 2.30  }
     };
 
     const cable = $("r1r2Cable"), length = $("r1r2Length"), temp = $("r1r2Temp"), ze = $("r1r2Ze");
@@ -1258,11 +1257,11 @@
     function solve() {
       showMsg(msg, "");
       const size = cable?.value || "1.5";
-      const row = R1R2_TABLE[size];
+      const row = RPRE_TABLE[size];
       if (!row) { outPerM.textContent = "\u2014"; outTotal.textContent = "\u2014"; outZs.textContent = "\u2014"; formula.textContent = ""; return; }
 
       const factor = Number(temp?.value || 1);
-      const corrected = +(row.r1r2 * factor).toFixed(2);
+      const corrected = +(row.rpre * factor).toFixed(2);
       tempNote.innerHTML = factor > 1 ? "corrected to ~70\u00B0C (\u00D71.20)" : "at 20\u00B0C";
       outPerM.textContent = corrected.toFixed(2) + " m\u03A9/m";
 
@@ -1282,7 +1281,7 @@
         formula.textContent = `Zs = ${zeVal} + ${totalOhm.toFixed(4)} = ${zs.toFixed(4)} \u03A9`;
       } else {
         outZs.textContent = "\u2014";
-        formula.textContent = `R1+R2 = ${corrected.toFixed(2)} \u00D7 ${L} = ${totalMohm.toFixed(2)} m\u03A9 (${totalOhm.toFixed(4)} \u03A9)`;
+        formula.textContent = `Rp+Re = ${corrected.toFixed(2)} \u00D7 ${L} = ${totalMohm.toFixed(2)} m\u03A9 (${totalOhm.toFixed(4)} \u03A9)`;
       }
     }
 
