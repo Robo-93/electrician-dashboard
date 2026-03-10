@@ -1042,7 +1042,7 @@
             <button id="r1r2Clear" class="btn-clear" type="button">Clear</button>
           </div>
           <div class="card-desc">
-            Calculate total Rp+Re for a cable run. Select cable size, enter length, and optionally add Ze for full Zs.
+            Calculate total Rp+Re for a cable run. Select cable size and enter length.
           </div>
 
           <div class="input-grid-wide">
@@ -1071,10 +1071,6 @@
               </select>
             </label>
 
-            <label class="field">
-              <span class="field-label">Ze (&Omega;) &mdash; optional</span>
-              <input id="r1r2Ze" class="input" inputmode="decimal" placeholder="e.g. 0.35">
-            </label>
           </div>
 
           <div id="r1r2Msg" class="error-banner" hidden></div>
@@ -1088,7 +1084,6 @@
             <div class="readout-grid-wide">
               <div class="readout-row"><span class="readout-key">Rp+Re per metre</span><span class="readout-val" id="r1r2OutPerM">&mdash;</span></div>
               <div class="readout-row"><span class="readout-key">Rp+Re total</span><span class="readout-val" id="r1r2OutTotal">&mdash;</span></div>
-              <div class="readout-row"><span class="readout-key">Zs (Ze + Rp+Re)</span><span class="readout-val" id="r1r2OutZs">&mdash;</span></div>
             </div>
             <div class="readout-note" id="r1r2Formula"></div>
           </div>
@@ -1250,16 +1245,16 @@
       "16.0": 0.0023
     };
 
-    const cable = $("r1r2Cable"), length = $("r1r2Length"), temp = $("r1r2Temp"), ze = $("r1r2Ze");
+    const cable = $("r1r2Cable"), length = $("r1r2Length"), temp = $("r1r2Temp");
     const clearBtn = $("r1r2Clear"), msg = $("r1r2Msg");
-    const outPerM = $("r1r2OutPerM"), outTotal = $("r1r2OutTotal"), outZs = $("r1r2OutZs");
+    const outPerM = $("r1r2OutPerM"), outTotal = $("r1r2OutTotal");
     const tempNote = $("r1r2TempNote"), formula = $("r1r2Formula");
 
     function solve() {
       showMsg(msg, "");
       const size = cable?.value || "1.5";
       const perM = RPRE_TABLE[size];
-      if (perM === undefined) { outPerM.textContent = "\u2014"; outTotal.textContent = "\u2014"; outZs.textContent = "\u2014"; formula.textContent = ""; return; }
+      if (perM === undefined) { outPerM.textContent = "\u2014"; outTotal.textContent = "\u2014"; formula.textContent = ""; return; }
 
       const factor = Number(temp?.value || 1);
       const corrected = +(perM * factor).toFixed(4);
@@ -1267,33 +1262,22 @@
       outPerM.textContent = corrected + " \u03A9/m";
 
       const L = parseNum(length?.value);
-      if (L === null) { outTotal.textContent = "\u2014"; outZs.textContent = "\u2014"; formula.textContent = ""; return; }
-      if (L <= 0) { showMsg(msg, "Length must be greater than 0."); outTotal.textContent = "\u2014"; outZs.textContent = "\u2014"; formula.textContent = ""; return; }
+      if (L === null) { outTotal.textContent = "\u2014"; formula.textContent = ""; return; }
+      if (L <= 0) { showMsg(msg, "Length must be greater than 0."); outTotal.textContent = "\u2014"; formula.textContent = ""; return; }
 
       const totalOhm = +(corrected * L).toFixed(4);
       outTotal.textContent = totalOhm.toFixed(4) + " \u03A9";
-
-      const zeVal = parseNum(ze?.value);
-      if (zeVal !== null) {
-        if (zeVal < 0) { showMsg(msg, "Ze must be 0 or greater."); outZs.textContent = "\u2014"; return; }
-        const zs = zeVal + totalOhm;
-        outZs.textContent = zs.toFixed(4) + " \u03A9";
-        formula.textContent = `Zs = ${zeVal} + ${totalOhm.toFixed(4)} = ${zs.toFixed(4)} \u03A9`;
-      } else {
-        outZs.textContent = "\u2014";
-        formula.textContent = `Rp+Re = ${corrected} \u00D7 ${L} = ${totalOhm.toFixed(4)} \u03A9`;
-      }
+      formula.textContent = `Rp+Re = ${corrected} \u00D7 ${L} = ${totalOhm.toFixed(4)} \u03A9`;
     }
 
     function clearAll() {
       if (cable) cable.value = "1.5";
       if (length) length.value = "";
       if (temp) temp.value = "1";
-      if (ze) ze.value = "";
       solve();
     }
 
-    for (const el of [cable, length, temp, ze]) { el?.addEventListener("input", solve); el?.addEventListener("change", solve); }
+    for (const el of [cable, length, temp]) { el?.addEventListener("input", solve); el?.addEventListener("change", solve); }
     clearBtn?.addEventListener("click", clearAll);
     solve();
   })();
