@@ -617,6 +617,335 @@
       margin-bottom: 0.45rem;
     }
 
+    /* ── Circuit Sizing Assistant ────────────────── */
+    .csa-mode-tabs {
+      display: flex;
+      gap: 0.35rem;
+      margin-bottom: 1rem;
+    }
+    .csa-mode-tab {
+      font-family: var(--font-heading);
+      font-size: 0.82rem;
+      font-weight: 600;
+      color: var(--text-muted);
+      background: transparent;
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      padding: 0.45rem 1rem;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+    .csa-mode-tab:hover {
+      color: var(--amber);
+      border-color: rgba(245,158,11,0.3);
+      background: var(--amber-dim);
+    }
+    .csa-mode-tab.active {
+      color: var(--bg);
+      background: var(--amber);
+      border-color: var(--amber);
+    }
+    .csa-templates {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+      margin-bottom: 1.25rem;
+    }
+    .csa-tpl-btn {
+      font-family: var(--font-heading);
+      font-size: 0.74rem;
+      font-weight: 600;
+      color: var(--text-muted);
+      background: var(--bg-inset);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 0.4rem 0.7rem;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      white-space: nowrap;
+    }
+    .csa-tpl-btn:hover {
+      color: var(--amber);
+      border-color: rgba(245,158,11,0.3);
+      background: var(--amber-dim);
+    }
+    .csa-tpl-btn.active {
+      color: var(--amber);
+      border-color: rgba(245,158,11,0.4);
+      background: var(--amber-dim);
+      box-shadow: 0 0 0 1px rgba(245,158,11,0.15);
+    }
+    .csa-layout {
+      display: grid;
+      gap: 1.25rem;
+    }
+    @media (min-width: 900px) {
+      .csa-layout {
+        grid-template-columns: 1fr 1fr;
+        align-items: start;
+      }
+    }
+    .csa-inputs-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-top: 2px solid rgba(245,158,11,0.3);
+      border-radius: var(--radius-lg);
+      padding: 1.25rem;
+    }
+    .csa-results-area {
+      display: grid;
+      gap: 0.85rem;
+    }
+    .csa-result-card {
+      background: var(--bg-inset);
+      border: 1px solid var(--cyan-dim);
+      border-radius: var(--radius);
+      padding: 0.85rem 1rem;
+    }
+    .csa-result-card.pass {
+      border-color: rgba(34,197,94,0.25);
+    }
+    .csa-result-card.fail {
+      border-color: var(--red-border);
+    }
+    .csa-result-card.warn {
+      border-color: rgba(245,158,11,0.25);
+    }
+    .csa-result-label {
+      font-size: 0.72rem;
+      font-weight: 600;
+      color: var(--cyan-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      font-family: var(--font-heading);
+      margin-bottom: 0.5rem;
+    }
+    .csa-result-card.pass .csa-result-label { color: rgba(34,197,94,0.7); }
+    .csa-result-card.fail .csa-result-label { color: rgba(239,68,68,0.7); }
+    .csa-result-card.warn .csa-result-label { color: rgba(245,158,11,0.7); }
+    .csa-rec-main {
+      display: grid;
+      gap: 0.4rem;
+    }
+    .csa-rec-row {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: 0.5rem;
+    }
+    .csa-rec-key {
+      font-size: 0.78rem;
+      color: var(--text-dim);
+      font-weight: 500;
+    }
+    .csa-rec-val {
+      font-family: var(--font-mono);
+      font-size: 0.88rem;
+      font-weight: 600;
+      color: var(--cyan);
+      text-align: right;
+    }
+    .csa-rec-val.pass-text { color: #22c55e; }
+    .csa-rec-val.fail-text { color: var(--red); }
+    .csa-reason-list, .csa-assumption-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      display: grid;
+      gap: 0.3rem;
+    }
+    .csa-reason-list li, .csa-assumption-list li {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      line-height: 1.45;
+      padding-left: 0.85rem;
+      position: relative;
+    }
+    .csa-reason-list li::before {
+      content: "\2192";
+      position: absolute;
+      left: 0;
+      color: var(--cyan-muted);
+    }
+    .csa-assumption-list li::before {
+      content: "\2022";
+      position: absolute;
+      left: 0;
+      color: var(--text-dim);
+    }
+    .csa-warning-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.5rem;
+      padding: 0.5rem 0.65rem;
+      border-radius: 6px;
+      font-size: 0.8rem;
+      line-height: 1.4;
+      margin-bottom: 0.35rem;
+    }
+    .csa-warning-item:last-child { margin-bottom: 0; }
+    .csa-warning-item.info {
+      background: var(--cyan-dim);
+      color: var(--cyan);
+      border: 1px solid rgba(34,211,238,0.12);
+    }
+    .csa-warning-item.caution {
+      background: var(--amber-dim);
+      color: var(--amber);
+      border: 1px solid rgba(245,158,11,0.15);
+    }
+    .csa-warning-item.critical {
+      background: var(--red-bg);
+      color: #fca5a5;
+      border: 1px solid var(--red-border);
+    }
+    .csa-warning-icon {
+      flex-shrink: 0;
+      font-size: 0.85rem;
+      line-height: 1;
+      margin-top: 0.1rem;
+    }
+    .csa-alt-item {
+      padding: 0.55rem 0.65rem;
+      background: rgba(255,255,255,0.02);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      margin-bottom: 0.35rem;
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      line-height: 1.45;
+    }
+    .csa-alt-item:last-child { margin-bottom: 0; }
+    .csa-alt-head {
+      font-family: var(--font-mono);
+      font-weight: 600;
+      color: var(--text);
+      font-size: 0.82rem;
+      margin-bottom: 0.2rem;
+    }
+    .csa-working-toggle {
+      font-family: var(--font-heading);
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: var(--text-muted);
+      background: transparent;
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 0.55rem 0.85rem;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      width: 100%;
+      text-align: left;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .csa-working-toggle:hover {
+      color: var(--amber);
+      border-color: rgba(245,158,11,0.3);
+    }
+    .csa-working-toggle .arrow {
+      transition: transform 0.2s ease;
+    }
+    .csa-working-toggle.open .arrow {
+      transform: rotate(180deg);
+    }
+    .csa-working-body {
+      display: none;
+      padding: 0.75rem 0.85rem;
+      background: var(--bg-inset);
+      border: 1px solid var(--border);
+      border-top: none;
+      border-radius: 0 0 var(--radius) var(--radius);
+    }
+    .csa-working-body.open { display: block; }
+    .csa-working-step {
+      display: flex;
+      justify-content: space-between;
+      gap: 0.75rem;
+      padding: 0.35rem 0;
+      border-bottom: 1px solid var(--border);
+      font-size: 0.8rem;
+    }
+    .csa-working-step:last-child { border-bottom: none; }
+    .csa-working-step-label {
+      color: var(--text-muted);
+      font-weight: 500;
+    }
+    .csa-working-step-value {
+      font-family: var(--font-mono);
+      color: var(--text);
+      font-weight: 500;
+      text-align: right;
+    }
+    .csa-input-group {
+      margin-bottom: 0.85rem;
+    }
+    .csa-input-group-title {
+      font-family: var(--font-heading);
+      font-size: 0.74rem;
+      font-weight: 600;
+      color: var(--text-dim);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-bottom: 0.5rem;
+      padding-bottom: 0.3rem;
+      border-bottom: 1px solid var(--border);
+    }
+    .csa-disclaimer {
+      font-size: 0.7rem;
+      color: var(--text-dim);
+      line-height: 1.5;
+      padding: 0.65rem 0.85rem;
+      background: rgba(255,255,255,0.015);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      margin-top: 0.75rem;
+      font-family: var(--font-mono);
+    }
+    .csa-empty-state {
+      text-align: center;
+      padding: 2rem 1rem;
+      color: var(--text-dim);
+      font-size: 0.85rem;
+    }
+    .csa-empty-state .hint {
+      font-size: 0.75rem;
+      margin-top: 0.4rem;
+    }
+    .csa-design-only { display: none; }
+    .csa-design-active .csa-design-only { display: grid; }
+    .csa-vd-bar {
+      height: 6px;
+      border-radius: 3px;
+      background: var(--border);
+      margin-top: 0.5rem;
+      overflow: hidden;
+    }
+    .csa-vd-fill {
+      height: 100%;
+      border-radius: 3px;
+      transition: width 0.3s ease, background 0.3s ease;
+    }
+    .csa-notes-field {
+      width: 100%;
+      background: var(--bg-input);
+      color: var(--text);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 0.65rem 0.75rem;
+      font-family: var(--font-body);
+      font-size: 0.85rem;
+      outline: none;
+      resize: vertical;
+      min-height: 3rem;
+      transition: border-color 0.2s ease;
+    }
+    .csa-notes-field:focus {
+      border-color: rgba(245,158,11,0.4);
+      box-shadow: 0 0 0 3px rgba(245,158,11,0.08);
+    }
+
     /* ── Mobile adjustments ───────────────────────── */
     @media (max-width: 480px) {
       .header-inner { padding: 0 0.75rem; }
@@ -628,6 +957,10 @@
       .input-grid, .input-grid-wide { grid-template-columns: 1fr; }
       .ref-table { font-size: 0.74rem; }
       .ref-table thead th, .ref-table tbody td { padding: 0.4rem 0.45rem; }
+      .csa-templates { gap: 0.3rem; }
+      .csa-tpl-btn { font-size: 0.68rem; padding: 0.35rem 0.55rem; }
+      .csa-mode-tab { font-size: 0.76rem; padding: 0.4rem 0.75rem; }
+      .csa-layout { grid-template-columns: 1fr; }
     }
   </style>
 </head>
@@ -647,6 +980,7 @@
         <a class="nav-link" href="#calculators">Calculators</a>
         <a class="nav-link" href="#electricity-cost">Elec. Cost</a>
         <a class="nav-link" href="#testing">Testing</a>
+        <a class="nav-link" href="#circuit-sizing">Sizing</a>
       </nav>
     </div>
   </header>
@@ -1122,6 +1456,312 @@
       </div>
     </section>
 
+    <!-- ═══ CIRCUIT SIZING ASSISTANT ═══ -->
+    <section id="circuit-sizing" class="section-gap">
+      <div class="section-header">
+        <div class="section-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M4 19.5A2.5 2.5 0 016.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 014 19.5v-15A2.5 2.5 0 016.5 2z"/><path d="M9 10h6M9 14h4"/>
+          </svg>
+        </div>
+        <h2 class="section-title">Circuit Sizing Assistant</h2>
+        <div class="section-line"></div>
+      </div>
+
+      <!-- Mode tabs -->
+      <div class="csa-mode-tabs">
+        <button class="csa-mode-tab active" data-mode="quick" id="csaModeQuick">Quick Estimate</button>
+        <button class="csa-mode-tab" data-mode="design" id="csaModeDesign">Design Mode</button>
+      </div>
+
+      <!-- Template buttons -->
+      <div class="csa-templates" id="csaTemplates">
+        <button class="csa-tpl-btn" data-tpl="lighting">Lighting</button>
+        <button class="csa-tpl-btn" data-tpl="socket_radial">Socket Radial</button>
+        <button class="csa-tpl-btn" data-tpl="cooker">Cooker</button>
+        <button class="csa-tpl-btn" data-tpl="shower">Shower</button>
+        <button class="csa-tpl-btn" data-tpl="immersion">Immersion</button>
+        <button class="csa-tpl-btn" data-tpl="dedicated_appliance">Dedicated Appliance</button>
+        <button class="csa-tpl-btn" data-tpl="submain">Submain</button>
+        <button class="csa-tpl-btn" data-tpl="motor">Motor / Plant</button>
+        <button class="csa-tpl-btn" data-tpl="hvac">AC / HVAC</button>
+        <button class="csa-tpl-btn" data-tpl="custom">Custom</button>
+      </div>
+
+      <!-- Two-column layout: inputs left, results right -->
+      <div class="csa-layout" id="csaForm">
+
+        <!-- ── LEFT: Inputs ── -->
+        <div class="csa-inputs-card">
+          <div class="card-head">
+            <div class="card-title">
+              <svg class="card-title-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 013 3L7 19l-4 1 1-4L16.5 3.5z"/>
+              </svg>
+              Circuit Details
+            </div>
+            <button id="csaClear" class="btn-clear" type="button">Clear</button>
+          </div>
+          <div class="card-desc">Select a template above for fast defaults, or enter details manually.</div>
+
+          <!-- General -->
+          <div class="csa-input-group">
+            <div class="csa-input-group-title">General</div>
+            <div class="input-grid">
+              <label class="field">
+                <span class="field-label">Setting</span>
+                <select id="csaSetting" class="select">
+                  <option value="domestic">Domestic</option>
+                  <option value="commercial">Commercial</option>
+                  <option value="industrial">Industrial</option>
+                </select>
+              </label>
+              <label class="field">
+                <span class="field-label">Phase</span>
+                <select id="csaPhase" class="select">
+                  <option value="single">Single-phase</option>
+                  <option value="three">Three-phase</option>
+                </select>
+              </label>
+              <label class="field">
+                <span class="field-label">Voltage (V)</span>
+                <input id="csaVoltage" class="input" inputmode="decimal" value="230" placeholder="230">
+              </label>
+              <label class="field">
+                <span class="field-label">Load input</span>
+                <select id="csaLoadType" class="select">
+                  <option value="watts">Watts (W)</option>
+                  <option value="kw">Kilowatts (kW)</option>
+                  <option value="amps">Amps (A)</option>
+                </select>
+              </label>
+              <label class="field">
+                <span class="field-label">Load value</span>
+                <input id="csaLoadValue" class="input" inputmode="decimal" placeholder="e.g. 3000">
+              </label>
+              <label class="field">
+                <span class="field-label">Run length (m)</span>
+                <input id="csaRunLength" class="input" inputmode="decimal" placeholder="e.g. 15">
+              </label>
+            </div>
+          </div>
+
+          <!-- Cable -->
+          <div class="csa-input-group">
+            <div class="csa-input-group-title">Cable</div>
+            <div class="input-grid">
+              <label class="field">
+                <span class="field-label">Cable type</span>
+                <select id="csaCableType" class="select">
+                  <option value="twin_earth">Twin &amp; Earth</option>
+                  <option value="singles">Singles in conduit/trunking</option>
+                  <option value="swa">SWA</option>
+                </select>
+              </label>
+              <label class="field">
+                <span class="field-label">Install method</span>
+                <select id="csaInstallMethod" class="select">
+                  <option value="clipped_direct">Clipped direct</option>
+                  <option value="conduit_in_wall">Conduit/trunking in wall</option>
+                  <option value="tray_surface">Tray / surface</option>
+                  <option value="buried_in_insulation">Buried in insulation</option>
+                  <option value="submain_estimate">Submain estimate</option>
+                </select>
+              </label>
+            </div>
+          </div>
+
+          <!-- Design-only: Correction factors -->
+          <div class="csa-input-group csa-design-only">
+            <div class="csa-input-group-title">Correction Factors</div>
+            <div class="input-grid">
+              <label class="field">
+                <span class="field-label">Ambient temp (&deg;C)</span>
+                <select id="csaAmbientTemp" class="select">
+                  <option value="25">25 &deg;C</option>
+                  <option value="30" selected>30 &deg;C</option>
+                  <option value="35">35 &deg;C</option>
+                  <option value="40">40 &deg;C</option>
+                  <option value="45">45 &deg;C</option>
+                </select>
+              </label>
+              <label class="field">
+                <span class="field-label">Grouped circuits</span>
+                <select id="csaGrouped" class="select">
+                  <option value="1">1 (none)</option>
+                  <option value="2">2</option>
+                  <option value="3">3</option>
+                  <option value="4">4</option>
+                  <option value="5">5</option>
+                  <option value="6">6</option>
+                </select>
+              </label>
+              <label class="field">
+                <span class="field-label">Thermal insulation</span>
+                <select id="csaThermal" class="select">
+                  <option value="no">No</option>
+                  <option value="yes">Yes &mdash; surrounded by insulation</option>
+                </select>
+              </label>
+              <label class="field">
+                <span class="field-label">Power factor</span>
+                <input id="csaPowerFactor" class="input" inputmode="decimal" value="1" placeholder="1.0">
+              </label>
+            </div>
+          </div>
+
+          <!-- Protection -->
+          <div class="csa-input-group">
+            <div class="csa-input-group-title">Protection</div>
+            <div class="input-grid">
+              <label class="field">
+                <span class="field-label">Protection preference</span>
+                <select id="csaProtPref" class="select">
+                  <option value="auto">Auto</option>
+                  <option value="rcbo">RCBO</option>
+                  <option value="mcb_shared_rcd">MCB + shared RCD</option>
+                  <option value="mcb_only">MCB only</option>
+                </select>
+              </label>
+              <label class="field">
+                <span class="field-label">Breaker curve</span>
+                <select id="csaCurvePref" class="select">
+                  <option value="auto">Auto</option>
+                  <option value="B">Type B</option>
+                  <option value="C">Type C</option>
+                </select>
+              </label>
+              <label class="field csa-design-only">
+                <span class="field-label">Inrush profile</span>
+                <select id="csaInrush" class="select">
+                  <option value="none">None</option>
+                  <option value="moderate">Moderate</option>
+                  <option value="high">High</option>
+                </select>
+              </label>
+              <label class="field csa-design-only">
+                <span class="field-label">RCD type preference</span>
+                <select id="csaRcdType" class="select">
+                  <option value="auto">Auto</option>
+                  <option value="AC">Type AC</option>
+                  <option value="A">Type A</option>
+                  <option value="F">Type F</option>
+                  <option value="B">Type B</option>
+                </select>
+              </label>
+            </div>
+          </div>
+
+          <!-- Diversity -->
+          <div class="csa-input-group csa-design-only">
+            <div class="csa-input-group-title">Diversity</div>
+            <div class="input-grid">
+              <label class="field">
+                <span class="field-label">Apply diversity</span>
+                <select id="csaDiversityEnabled" class="select">
+                  <option value="no">No</option>
+                  <option value="yes">Yes</option>
+                </select>
+              </label>
+              <label class="field">
+                <span class="field-label">Diversity profile</span>
+                <select id="csaDiversityProfile" class="select">
+                  <option value="none">None</option>
+                  <option value="lighting">Lighting</option>
+                  <option value="socket">Socket</option>
+                  <option value="cooker">Cooker</option>
+                  <option value="submain">Submain</option>
+                  <option value="custom">Custom %</option>
+                </select>
+              </label>
+              <label class="field">
+                <span class="field-label">Custom diversity %</span>
+                <input id="csaDiversityCustom" class="input" inputmode="decimal" placeholder="e.g. 80" disabled>
+              </label>
+            </div>
+          </div>
+
+          <!-- Future margin -->
+          <div class="csa-input-group">
+            <div class="csa-input-group-title">Margin</div>
+            <div class="input-grid">
+              <label class="field">
+                <span class="field-label">Future margin</span>
+                <select id="csaMargin" class="select">
+                  <option value="0">0% &mdash; no margin</option>
+                  <option value="10">10%</option>
+                  <option value="20">20%</option>
+                </select>
+              </label>
+            </div>
+          </div>
+
+          <!-- Notes -->
+          <div class="csa-input-group csa-design-only">
+            <div class="csa-input-group-title">Notes</div>
+            <textarea id="csaNotes" class="csa-notes-field" placeholder="Optional notes..."></textarea>
+          </div>
+
+          <div class="csa-disclaimer">
+            This tool is a sizing and selection aid based on entered assumptions. Final verification is still required against actual installation conditions, device data, fault protection, and applicable regulations.
+          </div>
+        </div>
+
+        <!-- ── RIGHT: Results ── -->
+        <div class="csa-results-area" id="csaResults">
+          <div class="csa-empty-state" id="csaEmptyState">
+            Select a template or enter load and run length to get a recommendation.
+            <div class="hint">Results update live as you change inputs.</div>
+          </div>
+
+          <!-- Recommendation -->
+          <div class="csa-result-card" id="csaRecCard" style="display:none">
+            <div class="csa-result-label">Recommended</div>
+            <div class="csa-rec-main" id="csaRecMain"></div>
+          </div>
+
+          <!-- Voltage Drop -->
+          <div class="csa-result-card" id="csaVdCard" style="display:none">
+            <div class="csa-result-label">Voltage Drop</div>
+            <div class="csa-rec-main" id="csaVdMain"></div>
+            <div class="csa-vd-bar"><div class="csa-vd-fill" id="csaVdFill"></div></div>
+          </div>
+
+          <!-- Why -->
+          <div class="csa-result-card" id="csaWhyCard" style="display:none">
+            <div class="csa-result-label">Why This Was Chosen</div>
+            <ul class="csa-reason-list" id="csaWhyList"></ul>
+          </div>
+
+          <!-- Assumptions -->
+          <div class="csa-result-card" id="csaAssCard" style="display:none">
+            <div class="csa-result-label">Assumptions</div>
+            <ul class="csa-assumption-list" id="csaAssList"></ul>
+          </div>
+
+          <!-- Warnings -->
+          <div class="csa-result-card" id="csaWarnCard" style="display:none">
+            <div class="csa-result-label">Warnings</div>
+            <div id="csaWarnList"></div>
+          </div>
+
+          <!-- Alternatives -->
+          <div class="csa-result-card" id="csaAltCard" style="display:none">
+            <div class="csa-result-label">Alternative Options</div>
+            <div id="csaAltList"></div>
+          </div>
+
+          <!-- Show Working -->
+          <div id="csaWorkingWrap" style="display:none">
+            <button class="csa-working-toggle" id="csaWorkingToggle">
+              Show Working <span class="arrow">&#9660;</span>
+            </button>
+            <div class="csa-working-body" id="csaWorkingBody"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
   </div>
 
   <footer class="site-footer">
@@ -1310,6 +1950,733 @@
     for (const el of [cable, length, temp]) { el?.addEventListener("input", solve); el?.addEventListener("change", solve); }
     clearBtn?.addEventListener("click", clearAll);
     solve();
+  })();
+
+  // ── Circuit Sizing Assistant ────────────────────────
+  (function () {
+    function $(id) { return document.getElementById(id); }
+    function parseNum(v) { const s = String(v ?? "").trim().replaceAll(",", ""); if (!s) return null; const n = Number(s); return Number.isFinite(n) ? n : null; }
+
+    // ── CONFIG / LOOKUP TABLES ──────────────────────
+    const BREAKER_SIZES = [6, 10, 16, 20, 25, 32, 40, 50, 63];
+    const CABLE_SIZES = [1.0, 1.5, 2.5, 4.0, 6.0, 10.0, 16.0];
+    const VD_LIMITS = { lighting: 3, default: 5 };
+
+    // Current-carrying capacity (A) by cable type and install method
+    // Rows: cable size. Columns: [clipped_direct, conduit_in_wall, tray_surface, buried_in_insulation, submain_estimate]
+    const CCC_TABLE = {
+      twin_earth: {
+        1.0:  [11, 10, 11, 7, 10],
+        1.5:  [14, 13, 14, 9, 13],
+        2.5:  [20, 18, 20, 13, 18],
+        4.0:  [26, 24, 26, 17, 24],
+        6.0:  [32, 30, 32, 21, 30],
+        10.0: [44, 40, 44, 29, 40],
+        16.0: [57, 52, 57, 38, 52]
+      },
+      singles: {
+        1.0:  [13, 12, 14, 8, 12],
+        1.5:  [16, 15, 17, 10, 15],
+        2.5:  [23, 21, 24, 15, 21],
+        4.0:  [30, 28, 32, 20, 28],
+        6.0:  [38, 35, 40, 25, 35],
+        10.0: [52, 48, 54, 34, 48],
+        16.0: [69, 63, 73, 46, 63]
+      },
+      swa: {
+        1.5:  [18, 16, 19, 12, 16],
+        2.5:  [25, 23, 26, 17, 23],
+        4.0:  [33, 30, 34, 22, 30],
+        6.0:  [42, 38, 43, 27, 38],
+        10.0: [57, 52, 58, 37, 52],
+        16.0: [76, 69, 77, 49, 69]
+      }
+    };
+
+    const INSTALL_METHOD_INDEX = {
+      clipped_direct: 0, conduit_in_wall: 1, tray_surface: 2,
+      buried_in_insulation: 3, submain_estimate: 4
+    };
+
+    // Voltage drop mV/A/m (single-phase, copper)
+    const MV_PER_A_M = {
+      twin_earth:  { 1.0: 44, 1.5: 29, 2.5: 18, 4.0: 11, 6.0: 7.3, 10.0: 4.4, 16.0: 2.8 },
+      singles:     { 1.0: 44, 1.5: 29, 2.5: 18, 4.0: 11, 6.0: 7.3, 10.0: 4.4, 16.0: 2.8 },
+      swa:         { 1.5: 29, 2.5: 18, 4.0: 11, 6.0: 7.3, 10.0: 4.4, 16.0: 2.8 }
+    };
+
+    // Correction factors
+    const TEMP_FACTORS = { 25: 1.03, 30: 1.0, 35: 0.94, 40: 0.87, 45: 0.79 };
+    const GROUPING_FACTORS = { 1: 1.0, 2: 0.80, 3: 0.70, 4: 0.65, 5: 0.60, 6: 0.57 };
+    const THERMAL_FACTOR = 0.5;
+
+    // Diversity presets: return multiplier (0-1)
+    const DIVERSITY_PRESETS = {
+      none: function () { return 1; },
+      lighting: function () { return 0.66; },
+      socket: function () { return 0.4; },
+      cooker: function (loadA) { return loadA > 10 ? (10 + (loadA - 10) * 0.3) / loadA : 1; },
+      submain: function () { return 0.5; },
+      custom: function () { return 1; }
+    };
+
+    // Circuit templates
+    const TEMPLATES = {
+      lighting: {
+        label: "Lighting", loadType: "watts", loadValue: 1200, runLength: 12,
+        vdCategory: "lighting", defaultCurve: "B", rcboPreferred: true, allowTypeC: false,
+        defaultDiversity: "lighting", cableType: "twin_earth", installMethod: "conduit_in_wall",
+        inrush: "none", setting: "domestic"
+      },
+      socket_radial: {
+        label: "Socket Radial", loadType: "watts", loadValue: 3000, runLength: 18,
+        vdCategory: "default", defaultCurve: "B", rcboPreferred: true, allowTypeC: false,
+        defaultDiversity: "socket", cableType: "twin_earth", installMethod: "clipped_direct",
+        inrush: "none", setting: "domestic"
+      },
+      cooker: {
+        label: "Cooker", loadType: "kw", loadValue: 10, runLength: 12,
+        vdCategory: "default", defaultCurve: "B", rcboPreferred: true, allowTypeC: false,
+        defaultDiversity: "cooker", cableType: "twin_earth", installMethod: "clipped_direct",
+        inrush: "none", setting: "domestic"
+      },
+      shower: {
+        label: "Shower", loadType: "kw", loadValue: 9, runLength: 15,
+        vdCategory: "default", defaultCurve: "B", rcboPreferred: true, allowTypeC: false,
+        defaultDiversity: "none", cableType: "twin_earth", installMethod: "clipped_direct",
+        inrush: "none", setting: "domestic"
+      },
+      immersion: {
+        label: "Immersion", loadType: "kw", loadValue: 3, runLength: 10,
+        vdCategory: "default", defaultCurve: "B", rcboPreferred: true, allowTypeC: false,
+        defaultDiversity: "none", cableType: "twin_earth", installMethod: "clipped_direct",
+        inrush: "none", setting: "domestic"
+      },
+      dedicated_appliance: {
+        label: "Dedicated Appliance", loadType: "kw", loadValue: 3, runLength: 10,
+        vdCategory: "default", defaultCurve: "B", rcboPreferred: true, allowTypeC: false,
+        defaultDiversity: "none", cableType: "twin_earth", installMethod: "clipped_direct",
+        inrush: "none", setting: "domestic"
+      },
+      submain: {
+        label: "Submain", loadType: "kw", loadValue: 20, runLength: 25,
+        vdCategory: "default", defaultCurve: "B", rcboPreferred: false, allowTypeC: false,
+        defaultDiversity: "submain", cableType: "swa", installMethod: "submain_estimate",
+        inrush: "none", setting: "domestic"
+      },
+      motor: {
+        label: "Motor / Plant", loadType: "kw", loadValue: 5, runLength: 20,
+        vdCategory: "default", defaultCurve: "C", rcboPreferred: false, allowTypeC: true,
+        defaultDiversity: "none", cableType: "singles", installMethod: "tray_surface",
+        inrush: "high", setting: "industrial"
+      },
+      hvac: {
+        label: "AC / HVAC", loadType: "kw", loadValue: 5, runLength: 15,
+        vdCategory: "default", defaultCurve: "C", rcboPreferred: false, allowTypeC: true,
+        defaultDiversity: "none", cableType: "singles", installMethod: "tray_surface",
+        inrush: "moderate", setting: "commercial"
+      },
+      custom: {
+        label: "Custom", loadType: "watts", loadValue: null, runLength: null,
+        vdCategory: "default", defaultCurve: "B", rcboPreferred: true, allowTypeC: true,
+        defaultDiversity: "none", cableType: "twin_earth", installMethod: "clipped_direct",
+        inrush: "none", setting: "domestic"
+      }
+    };
+
+    // ── CALCULATION ENGINE (pure) ───────────────────
+
+    function getBaseCurrent(loadType, loadValue, voltage, phase, pf) {
+      if (loadType === "amps") return loadValue;
+      let watts = loadType === "kw" ? loadValue * 1000 : loadValue;
+      if (phase === "three") return watts / (Math.sqrt(3) * voltage * pf);
+      return watts / (voltage * pf);
+    }
+
+    function applyDiversity(currentA, diversityEnabled, diversityProfile, customPercent) {
+      if (!diversityEnabled) return { diversifiedA: null, rule: null, multiplier: 1 };
+      const fn = DIVERSITY_PRESETS[diversityProfile] || DIVERSITY_PRESETS.none;
+      let mult;
+      if (diversityProfile === "custom") {
+        mult = (customPercent != null && customPercent > 0 && customPercent <= 100) ? customPercent / 100 : 1;
+      } else {
+        mult = fn(currentA);
+      }
+      const rules = {
+        lighting: "66% of connected load (lighting diversity)",
+        socket: "40% of connected load (socket diversity)",
+        cooker: "First 10 A at 100% + remainder at 30%",
+        submain: "50% of connected load (submain diversity)",
+        custom: customPercent + "% custom diversity",
+        none: "No diversity applied"
+      };
+      return { diversifiedA: +(currentA * mult).toFixed(2), rule: rules[diversityProfile] || "None", multiplier: mult };
+    }
+
+    function applyFutureMargin(currentA, marginPercent) {
+      if (!marginPercent || marginPercent <= 0) return currentA;
+      return currentA * (1 + marginPercent / 100);
+    }
+
+    function getCorrectionFactors(ambientTemp, groupedCircuits, thermalInsulation, mode) {
+      const Ca = mode === "design" ? (TEMP_FACTORS[ambientTemp] ?? 1.0) : 1.0;
+      const Cg = mode === "design" ? (GROUPING_FACTORS[groupedCircuits] ?? 1.0) : 1.0;
+      const Ci = (mode === "design" && thermalInsulation) ? THERMAL_FACTOR : 1.0;
+      return { Ca, Cg, Ci, overall: Ca * Cg * Ci };
+    }
+
+    function getRequiredCapacity(designCurrentA, correctionOverall) {
+      if (correctionOverall <= 0) return Infinity;
+      return designCurrentA / correctionOverall;
+    }
+
+    function getCableCapacity(cableType, size, installMethod) {
+      const table = CCC_TABLE[cableType];
+      if (!table) return null;
+      const row = table[size];
+      if (!row) return null;
+      const idx = INSTALL_METHOD_INDEX[installMethod] ?? 0;
+      return row[idx] ?? null;
+    }
+
+    function calcVoltageDrop(cableType, size, currentA, lengthM, voltage, phase) {
+      const mvTable = MV_PER_A_M[cableType];
+      if (!mvTable) return null;
+      let mv = mvTable[size];
+      if (mv == null) return null;
+      if (phase === "three") mv = mv * (Math.sqrt(3) / 2);
+      const dropV = (mv * currentA * lengthM) / 1000;
+      const dropPct = (dropV / voltage) * 100;
+      return { volts: +dropV.toFixed(3), percent: +dropPct.toFixed(2) };
+    }
+
+    function chooseBreaker(designCurrentA) {
+      for (const rating of BREAKER_SIZES) {
+        if (rating >= designCurrentA) return rating;
+      }
+      return null;
+    }
+
+    function chooseCurve(curvePref, template, inrush) {
+      if (curvePref === "B" || curvePref === "C") return curvePref;
+      // Auto logic
+      if (template && (template === "motor" || template === "hvac")) return "C";
+      if (inrush === "high" || inrush === "moderate") return "C";
+      return "B";
+    }
+
+    function chooseProtection(protPref, setting, template, tplConfig) {
+      if (protPref !== "auto") return protPref;
+      // Auto logic
+      if (setting === "domestic") {
+        return "rcbo"; // Strong domestic RCBO preference
+      }
+      if (tplConfig && tplConfig.rcboPreferred) return "rcbo";
+      if (setting === "industrial" && (template === "motor" || template === "submain")) return "mcb_shared_rcd";
+      return "rcbo";
+    }
+
+    function chooseRcdType(rcdPref, template, inrush) {
+      if (rcdPref !== "auto") return rcdPref;
+      if (template === "hvac" || template === "motor" || inrush === "high") return "A";
+      return "AC";
+    }
+
+    function findCable(input) {
+      const { cableType, installMethod, requiredCapacity, designCurrentA, runLengthM, voltage, phase, vdCategory, breakerA } = input;
+      const limitPct = VD_LIMITS[vdCategory] || VD_LIMITS.default;
+      const sizesToTest = CABLE_SIZES.filter(s => CCC_TABLE[cableType] && CCC_TABLE[cableType][s]);
+      const tested = [];
+      let recommended = null;
+
+      for (const size of sizesToTest) {
+        const capacity = getCableCapacity(cableType, size, installMethod);
+        if (capacity === null) continue;
+        const passCapacity = capacity >= requiredCapacity && capacity >= breakerA;
+        const vd = calcVoltageDrop(cableType, size, designCurrentA, runLengthM, voltage, phase);
+        const passVd = vd ? vd.percent <= limitPct : false;
+        const result = { size, capacity, passCapacity, vd, passVd, pass: passCapacity && passVd };
+        tested.push(result);
+        if (!recommended && result.pass) recommended = result;
+      }
+      return { recommended, tested, limitPct };
+    }
+
+    // Main engine
+    function calculate(input) {
+      const warnings = [];
+      const assumptions = [];
+      const reasons = [];
+      const working = [];
+
+      // Step 1: Base current
+      const pf = input.powerFactor || 1;
+      const baseCurrentA = getBaseCurrent(input.loadType, input.loadValue, input.voltage, input.phase, pf);
+      working.push({ label: "Entered load", value: input.loadType === "amps" ? baseCurrentA.toFixed(2) + " A" : (input.loadType === "kw" ? input.loadValue + " kW" : input.loadValue + " W") });
+      if (input.loadType !== "amps") {
+        working.push({ label: "Converted current (Ib)", value: baseCurrentA.toFixed(2) + " A" });
+      }
+      if (pf !== 1) {
+        working.push({ label: "Power factor", value: pf.toString() });
+      }
+
+      // Step 2: Diversity
+      const div = applyDiversity(baseCurrentA, input.diversityEnabled, input.diversityProfile, input.diversityCustomPercent);
+      const afterDiversity = div.diversifiedA !== null ? div.diversifiedA : baseCurrentA;
+      if (div.diversifiedA !== null) {
+        working.push({ label: "Diversity applied", value: div.rule });
+        working.push({ label: "Diversified current", value: div.diversifiedA.toFixed(2) + " A" });
+        warnings.push({ severity: "info", message: "Diversity applied to a final circuit \u2014 verify that this is appropriate for the specific installation." });
+      } else {
+        working.push({ label: "Diversity", value: "Not applied" });
+      }
+
+      // Step 3: Future margin
+      const afterMargin = applyFutureMargin(afterDiversity, input.futureMarginPercent);
+      if (input.futureMarginPercent > 0) {
+        working.push({ label: "Future margin", value: "+" + input.futureMarginPercent + "%" });
+        working.push({ label: "Design current (with margin)", value: afterMargin.toFixed(2) + " A" });
+      }
+      const designCurrentA = +afterMargin.toFixed(2);
+      working.push({ label: "Design current (In)", value: designCurrentA.toFixed(2) + " A" });
+
+      // Step 4: Protection
+      const tplConfig = TEMPLATES[input.template] || TEMPLATES.custom;
+      const protFamily = chooseProtection(input.protectionPreference, input.setting, input.template, tplConfig);
+      const curve = chooseCurve(input.breakerCurvePreference, input.template, input.inrush);
+      const rcdType = chooseRcdType(input.rcdTypePreference, input.template, input.inrush);
+
+      // Step 5: Breaker rating
+      const breakerA = chooseBreaker(designCurrentA);
+      if (breakerA === null) {
+        return { error: "Design current exceeds available breaker ratings (max 63 A in v1 tables). Consider a submain arrangement." };
+      }
+      working.push({ label: "Breaker rating selected", value: breakerA + " A " + curve + "-curve" });
+
+      // Step 6: Correction factors
+      const cf = getCorrectionFactors(input.ambientTemp, input.groupedCircuits, input.thermalInsulation, input.mode);
+      const requiredCapacity = getRequiredCapacity(breakerA, cf.overall);
+      if (input.mode === "design") {
+        working.push({ label: "Ca (ambient temp)", value: cf.Ca.toFixed(2) });
+        working.push({ label: "Cg (grouping)", value: cf.Cg.toFixed(2) });
+        if (input.thermalInsulation) working.push({ label: "Ci (thermal insulation)", value: cf.Ci.toFixed(2) });
+        working.push({ label: "Overall correction", value: cf.overall.toFixed(3) });
+        working.push({ label: "Required Iz (after derating)", value: requiredCapacity.toFixed(2) + " A" });
+      }
+
+      // Step 7: Cable sizing
+      const vdCategory = tplConfig.vdCategory || "default";
+      const cableResult = findCable({
+        cableType: input.cableType, installMethod: input.installMethod,
+        requiredCapacity, designCurrentA, runLengthM: input.runLengthM,
+        voltage: input.voltage, phase: input.phase, vdCategory, breakerA
+      });
+
+      if (!cableResult.recommended) {
+        return { error: "No cable in the v1 table meets both current capacity and voltage drop for these inputs. Try shorter run, lower load, or different cable type." };
+      }
+
+      const rec = cableResult.recommended;
+      const cableTypeLabels = { twin_earth: "twin & earth", singles: "singles in conduit", swa: "SWA" };
+
+      // Build reasons
+      reasons.push(rec.size + " mm\u00B2 " + (cableTypeLabels[input.cableType] || input.cableType) + " selected");
+
+      // Check why smaller cables failed
+      for (const t of cableResult.tested) {
+        if (t.size >= rec.size) break;
+        const failReasons = [];
+        if (!t.passCapacity) failReasons.push("insufficient current capacity");
+        if (!t.passVd) failReasons.push("fails voltage drop at " + input.runLengthM + " m");
+        if (failReasons.length) {
+          working.push({ label: t.size + " mm\u00B2 rejected", value: failReasons.join(", ") });
+          reasons.push(t.size + " mm\u00B2 fails: " + failReasons.join(" and "));
+        }
+      }
+      working.push({ label: "Selected cable", value: rec.size + " mm\u00B2 (Iz = " + rec.capacity + " A)" });
+      working.push({ label: "Voltage drop", value: rec.vd.volts + " V (" + rec.vd.percent + "%)" });
+
+      // Breaker curve reasons
+      if (curve === "C") {
+        if (input.inrush === "high" || input.inrush === "moderate") {
+          reasons.push("Type C suits this load due to " + input.inrush + " inrush");
+        } else if (input.template === "motor" || input.template === "hvac") {
+          reasons.push("Type C recommended for " + (TEMPLATES[input.template]?.label || input.template) + " circuits");
+        }
+      } else {
+        reasons.push("Type B suits this load \u2014 no major inrush selected");
+      }
+
+      // Protection reasons
+      const protLabels = { rcbo: "RCBO", mcb_shared_rcd: "MCB + shared RCD", mcb_only: "MCB only" };
+      if (protFamily === "rcbo") {
+        reasons.push("RCBO preferred for individual circuit protection");
+        if (input.setting === "domestic") reasons.push("Domestic setting strongly favours RCBO for final circuits");
+      } else if (protFamily === "mcb_shared_rcd") {
+        reasons.push("MCB + shared RCD is a valid alternative arrangement");
+      } else {
+        reasons.push("MCB only selected \u2014 no additional earth fault protection");
+      }
+
+      // Assumptions
+      assumptions.push("Copper conductor assumed");
+      assumptions.push("Selected installation method assumed correct");
+      assumptions.push("Simplified v1 lookup tables (not full BS 7671 tables)");
+      if (input.mode === "quick") {
+        assumptions.push("Quick Estimate mode \u2014 ambient 30\u00B0C, no grouping, no thermal derating");
+        assumptions.push("Power factor assumed as 1.0 (resistive load)");
+      }
+      assumptions.push("Cable lengths are point-to-point, not allowing for route detours");
+
+      // Warnings
+      if (input.mode === "quick") {
+        warnings.push({ severity: "info", message: "Quick Estimate result is based on simplified assumptions. Use Design Mode for correction factors." });
+      }
+      if (input.thermalInsulation) {
+        warnings.push({ severity: "caution", message: "Buried in insulation significantly reduces cable capacity \u2014 verify thermal conditions on site." });
+      }
+      if (input.groupedCircuits > 1) {
+        warnings.push({ severity: "caution", message: "Grouped circuits (" + input.groupedCircuits + ") reduce effective current-carrying capacity." });
+      }
+      if (curve === "C" && input.inrush === "none" && input.breakerCurvePreference === "C") {
+        warnings.push({ severity: "caution", message: "Type C selected without clear inrush justification \u2014 Type B may be more appropriate." });
+      }
+      if (protFamily === "mcb_shared_rcd") {
+        warnings.push({ severity: "info", message: "Shared RCD arrangement reduces discrimination compared with individual RCBOs." });
+      }
+      if (protFamily === "mcb_only") {
+        warnings.push({ severity: "critical", message: "MCB only selected \u2014 additional earth fault protection may be required for this circuit type." });
+      }
+      if (input.setting === "industrial" && input.mode === "quick") {
+        warnings.push({ severity: "caution", message: "Industrial setting with minimal inputs \u2014 use Design Mode for better confidence." });
+      }
+      if (input.installMethod === "buried_in_insulation") {
+        warnings.push({ severity: "caution", message: "Buried in insulation can significantly reduce cable capacity. Confirm installation conditions." });
+      }
+      warnings.push({ severity: "info", message: "Final verification required \u2014 verify Zs, disconnection times, and breaking capacity separately." });
+
+      // Alternatives
+      const alternatives = [];
+      // Next cable size up
+      const recIdx = cableResult.tested.findIndex(t => t.size === rec.size);
+      if (recIdx >= 0 && recIdx < cableResult.tested.length - 1) {
+        const next = cableResult.tested[recIdx + 1];
+        if (next && next.pass) {
+          alternatives.push({
+            cableSizeMm2: next.size, breakerA, curve,
+            notes: [next.size + " mm\u00B2 for additional headroom or future load growth", "Voltage drop: " + next.vd.percent + "%"]
+          });
+        }
+      }
+      // Lower breaker option (more conservative)
+      const lowerBreakers = BREAKER_SIZES.filter(r => r < breakerA && r >= designCurrentA);
+      if (lowerBreakers.length > 0) {
+        const lowerB = lowerBreakers[lowerBreakers.length - 1];
+        alternatives.push({
+          cableSizeMm2: rec.size, breakerA: lowerB, curve,
+          notes: [lowerB + " A breaker as more conservative option", "Still covers design current of " + designCurrentA + " A"]
+        });
+      }
+      // MCB+RCD as alternative if RCBO selected
+      if (protFamily === "rcbo") {
+        alternatives.push({
+          cableSizeMm2: rec.size, breakerA, curve,
+          notes: ["MCB + shared RCD as alternative arrangement", "Lower cost per circuit but reduced discrimination"]
+        });
+      }
+
+      working.push({ label: "Result", value: rec.pass ? "PASS" : "FAIL" });
+
+      return {
+        connectedLoadA: +baseCurrentA.toFixed(2),
+        diversifiedLoadA: div.diversifiedA,
+        designCurrentA,
+        recommendedCable: {
+          sizeMm2: rec.size, type: cableTypeLabels[input.cableType] || input.cableType,
+          reason: reasons
+        },
+        recommendedProtection: {
+          deviceFamily: protLabels[protFamily] || protFamily,
+          ratingA: breakerA, curve, rcdType,
+          reason: reasons
+        },
+        voltageDrop: {
+          volts: rec.vd.volts, percent: rec.vd.percent,
+          limitPercent: cableResult.limitPct, pass: rec.vd.percent <= cableResult.limitPct
+        },
+        assumptions, warnings, alternatives, working, reasons
+      };
+    }
+
+    // ── UI LAYER ────────────────────────────────────
+
+    let currentMode = "quick";
+    let currentTemplate = null;
+
+    const els = {
+      modeQuick: $("csaModeQuick"), modeDesign: $("csaModeDesign"),
+      form: $("csaForm"),
+      setting: $("csaSetting"), phase: $("csaPhase"), voltage: $("csaVoltage"),
+      loadType: $("csaLoadType"), loadValue: $("csaLoadValue"), runLength: $("csaRunLength"),
+      cableType: $("csaCableType"), installMethod: $("csaInstallMethod"),
+      ambientTemp: $("csaAmbientTemp"), grouped: $("csaGrouped"), thermal: $("csaThermal"),
+      pf: $("csaPowerFactor"),
+      protPref: $("csaProtPref"), curvePref: $("csaCurvePref"),
+      inrush: $("csaInrush"), rcdType: $("csaRcdType"),
+      diversityEnabled: $("csaDiversityEnabled"), diversityProfile: $("csaDiversityProfile"),
+      diversityCustom: $("csaDiversityCustom"),
+      margin: $("csaMargin"), notes: $("csaNotes"),
+      clearBtn: $("csaClear"),
+      emptyState: $("csaEmptyState"),
+      recCard: $("csaRecCard"), recMain: $("csaRecMain"),
+      vdCard: $("csaVdCard"), vdMain: $("csaVdMain"), vdFill: $("csaVdFill"),
+      whyCard: $("csaWhyCard"), whyList: $("csaWhyList"),
+      assCard: $("csaAssCard"), assList: $("csaAssList"),
+      warnCard: $("csaWarnCard"), warnList: $("csaWarnList"),
+      altCard: $("csaAltCard"), altList: $("csaAltList"),
+      workingWrap: $("csaWorkingWrap"), workingToggle: $("csaWorkingToggle"), workingBody: $("csaWorkingBody")
+    };
+
+    function setMode(mode) {
+      currentMode = mode;
+      els.modeQuick.classList.toggle("active", mode === "quick");
+      els.modeDesign.classList.toggle("active", mode === "design");
+      els.form.classList.toggle("csa-design-active", mode === "design");
+      solve();
+    }
+
+    function applyTemplate(tplKey) {
+      const tpl = TEMPLATES[tplKey];
+      if (!tpl) return;
+      currentTemplate = tplKey;
+
+      // Highlight active template button
+      document.querySelectorAll(".csa-tpl-btn").forEach(btn => {
+        btn.classList.toggle("active", btn.dataset.tpl === tplKey);
+      });
+
+      if (tpl.setting) els.setting.value = tpl.setting;
+      if (tpl.cableType) els.cableType.value = tpl.cableType;
+      if (tpl.installMethod) els.installMethod.value = tpl.installMethod;
+      if (tpl.loadType) els.loadType.value = tpl.loadType;
+      if (tpl.loadValue != null) els.loadValue.value = tpl.loadValue;
+      else els.loadValue.value = "";
+      if (tpl.runLength != null) els.runLength.value = tpl.runLength;
+      else els.runLength.value = "";
+      if (tpl.inrush) els.inrush.value = tpl.inrush;
+
+      // Auto-set curve and protection to auto for template
+      els.curvePref.value = "auto";
+      els.protPref.value = "auto";
+      els.rcdType.value = "auto";
+
+      // Diversity
+      if (currentMode === "design" && tpl.defaultDiversity && tpl.defaultDiversity !== "none") {
+        els.diversityEnabled.value = "yes";
+        els.diversityProfile.value = tpl.defaultDiversity;
+      }
+
+      solve();
+    }
+
+    function gatherInput() {
+      const loadValue = parseNum(els.loadValue.value);
+      const runLength = parseNum(els.runLength.value);
+      const voltage = parseNum(els.voltage.value) || 230;
+      const pf = currentMode === "design" ? (parseNum(els.pf.value) || 1) : 1;
+
+      return {
+        mode: currentMode,
+        template: currentTemplate || "custom",
+        setting: els.setting.value,
+        phase: els.phase.value,
+        voltage,
+        loadType: els.loadType.value,
+        loadValue,
+        powerFactor: pf,
+        runLengthM: runLength,
+        cableType: els.cableType.value,
+        installMethod: els.installMethod.value,
+        ambientTemp: currentMode === "design" ? Number(els.ambientTemp.value) : 30,
+        groupedCircuits: currentMode === "design" ? Number(els.grouped.value) : 1,
+        thermalInsulation: currentMode === "design" ? els.thermal.value === "yes" : false,
+        diversityEnabled: currentMode === "design" ? els.diversityEnabled.value === "yes" : false,
+        diversityProfile: els.diversityProfile.value,
+        diversityCustomPercent: parseNum(els.diversityCustom.value),
+        futureMarginPercent: Number(els.margin.value),
+        protectionPreference: els.protPref.value,
+        breakerCurvePreference: els.curvePref.value,
+        inrush: currentMode === "design" ? els.inrush.value : "none",
+        rcdTypePreference: currentMode === "design" ? els.rcdType.value : "auto"
+      };
+    }
+
+    function hideAllResults() {
+      els.emptyState.style.display = "block";
+      els.recCard.style.display = "none";
+      els.vdCard.style.display = "none";
+      els.whyCard.style.display = "none";
+      els.assCard.style.display = "none";
+      els.warnCard.style.display = "none";
+      els.altCard.style.display = "none";
+      els.workingWrap.style.display = "none";
+    }
+
+    function renderResults(result) {
+      if (result.error) {
+        hideAllResults();
+        els.emptyState.innerHTML = '<div style="color:var(--red)">' + result.error + '</div>';
+        return;
+      }
+
+      els.emptyState.style.display = "none";
+
+      // Recommendation card
+      els.recCard.style.display = "";
+      const passClass = result.voltageDrop.pass ? "pass" : "fail";
+      els.recCard.className = "csa-result-card " + passClass;
+      els.recMain.innerHTML =
+        row("Cable", result.recommendedCable.sizeMm2 + " mm\u00B2 " + result.recommendedCable.type) +
+        row("Protective device", result.recommendedProtection.ratingA + " A " + result.recommendedProtection.curve + "-curve " + result.recommendedProtection.deviceFamily) +
+        (result.recommendedProtection.rcdType ? row("RCD type", "Type " + result.recommendedProtection.rcdType) : "") +
+        row("Design current", result.designCurrentA + " A") +
+        (result.diversifiedLoadA !== null ? row("Connected load", result.connectedLoadA + " A") : "") +
+        (result.diversifiedLoadA !== null ? row("Diversified load", result.diversifiedLoadA + " A") : "") +
+        row("Voltage drop", result.voltageDrop.percent + "% (" + result.voltageDrop.volts + " V)", result.voltageDrop.pass ? "pass-text" : "fail-text") +
+        row("Result", result.voltageDrop.pass ? "Pass" : "Fail", result.voltageDrop.pass ? "pass-text" : "fail-text");
+
+      // Voltage drop card
+      els.vdCard.style.display = "";
+      els.vdCard.className = "csa-result-card " + (result.voltageDrop.pass ? "pass" : "fail");
+      els.vdMain.innerHTML =
+        row("Drop", result.voltageDrop.volts + " V") +
+        row("Percentage", result.voltageDrop.percent + "%", result.voltageDrop.pass ? "pass-text" : "fail-text") +
+        row("Limit", result.voltageDrop.limitPercent + "%");
+      const fillPct = Math.min(100, (result.voltageDrop.percent / result.voltageDrop.limitPercent) * 100);
+      els.vdFill.style.width = fillPct + "%";
+      els.vdFill.style.background = result.voltageDrop.pass
+        ? (fillPct > 75 ? "var(--amber)" : "#22c55e")
+        : "var(--red)";
+
+      // Why card
+      els.whyCard.style.display = "";
+      els.whyList.innerHTML = result.reasons.map(r => "<li>" + esc(r) + "</li>").join("");
+
+      // Assumptions card
+      els.assCard.style.display = "";
+      els.assList.innerHTML = result.assumptions.map(a => "<li>" + esc(a) + "</li>").join("");
+
+      // Warnings card
+      if (result.warnings.length) {
+        els.warnCard.style.display = "";
+        const icons = { info: "\u2139\uFE0F", caution: "\u26A0\uFE0F", critical: "\u274C" };
+        els.warnList.innerHTML = result.warnings.map(w =>
+          '<div class="csa-warning-item ' + w.severity + '">' +
+          '<span class="csa-warning-icon">' + (icons[w.severity] || "") + '</span>' +
+          '<span>' + esc(w.message) + '</span></div>'
+        ).join("");
+      } else {
+        els.warnCard.style.display = "none";
+      }
+
+      // Alternatives card
+      if (result.alternatives.length) {
+        els.altCard.style.display = "";
+        els.altList.innerHTML = result.alternatives.map(a =>
+          '<div class="csa-alt-item"><div class="csa-alt-head">' +
+          a.cableSizeMm2 + " mm\u00B2 / " + a.breakerA + " A " + a.curve + "-curve" +
+          '</div>' + a.notes.map(n => '<div style="font-size:0.78rem;color:var(--text-dim)">' + esc(n) + '</div>').join("") +
+          '</div>'
+        ).join("");
+      } else {
+        els.altCard.style.display = "none";
+      }
+
+      // Show Working
+      els.workingWrap.style.display = "";
+      els.workingBody.innerHTML = result.working.map(w =>
+        '<div class="csa-working-step"><span class="csa-working-step-label">' + esc(w.label) +
+        '</span><span class="csa-working-step-value">' + esc(w.value) + '</span></div>'
+      ).join("");
+    }
+
+    function row(key, val, extraClass) {
+      return '<div class="csa-rec-row"><span class="csa-rec-key">' + esc(key) +
+        '</span><span class="csa-rec-val' + (extraClass ? " " + extraClass : "") + '">' + esc(val) + '</span></div>';
+    }
+
+    function esc(s) {
+      const d = document.createElement("div");
+      d.textContent = s;
+      return d.innerHTML;
+    }
+
+    function solve() {
+      const input = gatherInput();
+      if (input.loadValue === null || input.loadValue <= 0 || input.runLengthM === null || input.runLengthM <= 0) {
+        hideAllResults();
+        return;
+      }
+      const result = calculate(input);
+      renderResults(result);
+    }
+
+    // Event listeners
+    els.modeQuick.addEventListener("click", () => setMode("quick"));
+    els.modeDesign.addEventListener("click", () => setMode("design"));
+
+    document.querySelectorAll(".csa-tpl-btn").forEach(btn => {
+      btn.addEventListener("click", () => applyTemplate(btn.dataset.tpl));
+    });
+
+    // Diversity custom enable/disable
+    els.diversityProfile.addEventListener("change", () => {
+      els.diversityCustom.disabled = els.diversityProfile.value !== "custom";
+      solve();
+    });
+
+    // Phase -> voltage sync
+    els.phase.addEventListener("change", () => {
+      els.voltage.value = els.phase.value === "three" ? "400" : "230";
+      solve();
+    });
+
+    // Show Working toggle
+    els.workingToggle.addEventListener("click", () => {
+      els.workingToggle.classList.toggle("open");
+      els.workingBody.classList.toggle("open");
+    });
+
+    // Clear
+    els.clearBtn.addEventListener("click", () => {
+      currentTemplate = null;
+      document.querySelectorAll(".csa-tpl-btn").forEach(b => b.classList.remove("active"));
+      els.setting.value = "domestic"; els.phase.value = "single"; els.voltage.value = "230";
+      els.loadType.value = "watts"; els.loadValue.value = ""; els.runLength.value = "";
+      els.cableType.value = "twin_earth"; els.installMethod.value = "clipped_direct";
+      els.ambientTemp.value = "30"; els.grouped.value = "1"; els.thermal.value = "no";
+      els.pf.value = "1"; els.protPref.value = "auto"; els.curvePref.value = "auto";
+      els.inrush.value = "none"; els.rcdType.value = "auto";
+      els.diversityEnabled.value = "no"; els.diversityProfile.value = "none";
+      els.diversityCustom.value = ""; els.diversityCustom.disabled = true;
+      els.margin.value = "0"; els.notes.value = "";
+      hideAllResults();
+    });
+
+    // Live update on any input change
+    const allInputs = [
+      els.setting, els.phase, els.voltage, els.loadType, els.loadValue, els.runLength,
+      els.cableType, els.installMethod, els.ambientTemp, els.grouped, els.thermal, els.pf,
+      els.protPref, els.curvePref, els.inrush, els.rcdType,
+      els.diversityEnabled, els.diversityProfile, els.diversityCustom, els.margin
+    ];
+    for (const el of allInputs) {
+      el?.addEventListener("input", solve);
+      el?.addEventListener("change", solve);
+    }
+
+    // Init
+    hideAllResults();
   })();
 
   // ── Active nav highlight on scroll ──────────────────
