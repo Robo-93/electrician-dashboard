@@ -1009,6 +1009,205 @@
     .cref-filters .field { min-width: 10rem; }
     .cref-highlight { background: rgba(245,158,11,0.08) !important; }
 
+    /* ── Three-Phase Balancing ──────────────────────── */
+    .phase-bar-wrap {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 0.75rem;
+      margin-top: 0.65rem;
+    }
+    .phase-bar-item {
+      text-align: center;
+    }
+    .phase-bar-label {
+      font-family: var(--font-heading);
+      font-size: 0.75rem;
+      font-weight: 600;
+      margin-bottom: 0.3rem;
+    }
+    .phase-bar-label.l1 { color: #ef4444; }
+    .phase-bar-label.l2 { color: #f59e0b; }
+    .phase-bar-label.l3 { color: #3b82f6; }
+    .phase-bar-track {
+      height: 8px;
+      background: var(--border);
+      border-radius: 4px;
+      overflow: hidden;
+      margin-bottom: 0.25rem;
+    }
+    .phase-bar-fill {
+      height: 100%;
+      border-radius: 4px;
+      transition: width 0.3s ease;
+    }
+    .phase-bar-fill.l1 { background: #ef4444; }
+    .phase-bar-fill.l2 { background: #f59e0b; }
+    .phase-bar-fill.l3 { background: #3b82f6; }
+    .phase-bar-val {
+      font-family: var(--font-mono);
+      font-size: 0.82rem;
+      font-weight: 600;
+      color: var(--text);
+    }
+
+    /* ── Conduit Fill ───────────────────────────────── */
+    .conduit-cable-row {
+      display: flex;
+      align-items: end;
+      gap: 0.5rem;
+      margin-bottom: 0.4rem;
+      flex-wrap: wrap;
+    }
+    .conduit-cable-row .field { min-width: 7rem; flex: 1; }
+    .conduit-remove-btn {
+      font-size: 0.72rem;
+      font-family: var(--font-heading);
+      font-weight: 600;
+      color: var(--red);
+      background: var(--red-bg);
+      border: 1px solid var(--red-border);
+      border-radius: 6px;
+      padding: 0.45rem 0.6rem;
+      cursor: pointer;
+      white-space: nowrap;
+    }
+    .conduit-add-btn {
+      font-size: 0.75rem;
+      font-family: var(--font-heading);
+      font-weight: 600;
+      color: var(--amber);
+      background: var(--amber-dim);
+      border: 1px solid rgba(245,158,11,0.25);
+      border-radius: 6px;
+      padding: 0.45rem 0.75rem;
+      cursor: pointer;
+      margin-top: 0.35rem;
+    }
+
+    /* ── Job Notes ──────────────────────────────────── */
+    .jn-circuit-row {
+      display: grid;
+      gap: 0.4rem;
+      grid-template-columns: 2.5rem 1fr repeat(5, minmax(4.5rem, 1fr)) 2.5rem;
+      align-items: end;
+      margin-bottom: 0.35rem;
+    }
+    .jn-circuit-row .input {
+      padding: 0.45rem 0.5rem;
+      font-size: 0.78rem;
+    }
+    .jn-header-row {
+      display: grid;
+      gap: 0.4rem;
+      grid-template-columns: 2.5rem 1fr repeat(5, minmax(4.5rem, 1fr)) 2.5rem;
+      margin-bottom: 0.3rem;
+    }
+    .jn-header-row span {
+      font-size: 0.68rem;
+      font-weight: 600;
+      color: var(--text-dim);
+      text-transform: uppercase;
+      letter-spacing: 0.03em;
+      font-family: var(--font-heading);
+    }
+    .jn-row-num {
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      color: var(--text-dim);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding-bottom: 0.45rem;
+    }
+    .jn-remove-btn {
+      font-size: 0.68rem;
+      color: var(--red);
+      background: none;
+      border: 1px solid var(--red-border);
+      border-radius: 6px;
+      padding: 0.35rem;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .jn-actions {
+      display: flex;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+      margin-top: 0.75rem;
+    }
+    .jn-btn {
+      font-family: var(--font-heading);
+      font-size: 0.75rem;
+      font-weight: 600;
+      padding: 0.5rem 0.85rem;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+    .jn-btn-primary {
+      color: var(--bg);
+      background: var(--amber);
+      border: 1px solid var(--amber);
+    }
+    .jn-btn-secondary {
+      color: var(--text-muted);
+      background: transparent;
+      border: 1px solid var(--border);
+    }
+    .jn-btn-secondary:hover {
+      color: var(--amber);
+      border-color: rgba(245,158,11,0.3);
+    }
+    .jn-scroll-wrap {
+      overflow-x: auto;
+      margin-top: 0.5rem;
+    }
+    @media (max-width: 768px) {
+      .jn-circuit-row, .jn-header-row {
+        grid-template-columns: 2rem 1fr 1fr;
+      }
+      .jn-circuit-row { gap: 0.3rem; }
+    }
+
+    /* ── IP Decoder ─────────────────────────────────── */
+    .ip-display {
+      display: flex;
+      gap: 0.5rem;
+      align-items: center;
+      justify-content: center;
+      margin: 0.75rem 0;
+    }
+    .ip-digit-box {
+      font-family: var(--font-mono);
+      font-size: 1.5rem;
+      font-weight: 700;
+      padding: 0.5rem 0.85rem;
+      background: var(--bg-inset);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      min-width: 2.5rem;
+      text-align: center;
+    }
+    .ip-digit-box.prefix { color: var(--text-muted); font-size: 1.1rem; }
+    .ip-digit-box.d1 { color: var(--amber); border-color: rgba(245,158,11,0.3); }
+    .ip-digit-box.d2 { color: var(--cyan); border-color: var(--cyan-dim); }
+
+    /* ── Unit Converter ─────────────────────────────── */
+    .uc-result {
+      font-family: var(--font-mono);
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: var(--cyan);
+      padding: 0.75rem;
+      background: var(--bg-inset);
+      border: 1px solid var(--cyan-dim);
+      border-radius: var(--radius);
+      text-align: center;
+      margin-top: 0.5rem;
+    }
+
     /* ── Mobile adjustments ───────────────────────── */
     @media (max-width: 480px) {
       .header-inner { padding: 0 0.75rem; }
@@ -1048,6 +1247,9 @@
         <a class="nav-link" href="#circuit-sizing">Sizing</a>
         <a class="nav-link" href="#fault-protection">Fault</a>
         <a class="nav-link" href="#cable-ref">Cable Ref</a>
+        <a class="nav-link" href="#on-site-tools">On-Site</a>
+        <a class="nav-link" href="#reference">Reference</a>
+        <a class="nav-link" href="#job-notes">Notes</a>
       </nav>
     </div>
   </header>
@@ -1518,6 +1720,57 @@
             <div class="rpre-result-label">Rp+Re Total <span class="rpre-result-temp" id="r1r2TempNote">at 20&deg;C</span></div>
             <div class="rpre-result-value" id="r1r2OutTotal">&mdash;</div>
             <div class="rpre-result-formula" id="r1r2Formula"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Cable Length from Rp+Re (reverse calculator) -->
+      <div class="calc-grid-full">
+        <div class="calc-card">
+          <div class="card-head">
+            <div class="card-title">
+              <svg class="card-title-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M21 16V8a2 2 0 00-1-1.73l-7-4a2 2 0 00-2 0l-7 4A2 2 0 003 8v8a2 2 0 001 1.73l7 4a2 2 0 002 0l7-4A2 2 0 0021 16z"/>
+              </svg>
+              Cable Length from Rp+Re
+            </div>
+            <button id="revRpClear" class="btn-clear" type="button">Clear</button>
+          </div>
+          <div class="card-desc">
+            Reverse calculator &mdash; enter a measured Rp+Re and cable size to estimate cable length. Useful for sanity-checking test results.
+          </div>
+
+          <div class="input-grid-wide">
+            <label class="field">
+              <span class="field-label">Measured Rp+Re (&Omega;)</span>
+              <input id="revRpValue" class="input" inputmode="decimal" placeholder="e.g. 0.48">
+            </label>
+            <label class="field">
+              <span class="field-label">Cable size (mm&sup2;)</span>
+              <select id="revRpCable" class="select">
+                <option value="1.5">1.5 mm&sup2;</option>
+                <option value="2.5" selected>2.5 mm&sup2;</option>
+                <option value="4.0">4.0 mm&sup2;</option>
+                <option value="6.0">6.0 mm&sup2;</option>
+                <option value="10.0">10.0 mm&sup2;</option>
+                <option value="16.0">16.0 mm&sup2;</option>
+              </select>
+            </label>
+            <label class="field">
+              <span class="field-label">Temp corrected?</span>
+              <select id="revRpTemp" class="select">
+                <option value="1">No &mdash; at 20&deg;C</option>
+                <option value="1.20">Yes &mdash; &times;1.20 (~70&deg;C)</option>
+              </select>
+            </label>
+          </div>
+
+          <div id="revRpMsg" class="error-banner" hidden></div>
+
+          <div class="rpre-result">
+            <div class="rpre-result-label">Estimated Cable Length</div>
+            <div class="rpre-result-value" id="revRpOutLength">&mdash;</div>
+            <div class="rpre-result-formula" id="revRpFormula"></div>
           </div>
         </div>
       </div>
@@ -2205,6 +2458,490 @@
 
         <div class="text-tiny" style="margin-top: 0.55rem;">
           Values are approximate for copper conductors at 70&deg;C operating temperature. Always verify against manufacturer data and current edition of wiring regulations.
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══ ON-SITE TOOLS SECTION ═══ -->
+    <section id="on-site-tools" class="section-gap">
+      <div class="section-header">
+        <div class="section-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M14.7 6.3a1 1 0 000 1.4l1.6 1.6a1 1 0 001.4 0l3.77-3.77a6 6 0 01-7.94 7.94L6.73 20.18a2.12 2.12 0 01-3-3l6.71-6.71a6 6 0 017.94-7.94L14.7 6.3z"/>
+          </svg>
+        </div>
+        <h2 class="section-title">On-Site Tools</h2>
+        <div class="section-line"></div>
+      </div>
+
+      <div class="calc-grid-2">
+
+        <!-- ── Three-Phase Load Balancing ── -->
+        <div class="calc-card">
+          <div class="card-head">
+            <div class="card-title">
+              <svg class="card-title-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M18 20V10M12 20V4M6 20v-6"/>
+              </svg>
+              Three-Phase Load Balancing
+            </div>
+            <button id="tpClear" class="btn-clear" type="button">Clear</button>
+          </div>
+          <div class="card-desc">Enter load per phase to see imbalance and which phase to put the next circuit on.</div>
+
+          <div class="input-grid">
+            <label class="field">
+              <span class="field-label">L1 load (A)</span>
+              <input id="tpL1" class="input" inputmode="decimal" placeholder="e.g. 32">
+            </label>
+            <label class="field">
+              <span class="field-label">L2 load (A)</span>
+              <input id="tpL2" class="input" inputmode="decimal" placeholder="e.g. 28">
+            </label>
+            <label class="field">
+              <span class="field-label">L3 load (A)</span>
+              <input id="tpL3" class="input" inputmode="decimal" placeholder="e.g. 35">
+            </label>
+          </div>
+
+          <div class="readout" style="margin-top:0.85rem">
+            <div class="readout-head">
+              <div class="readout-label">Balance</div>
+              <div class="readout-sub" id="tpStatus">&mdash;</div>
+            </div>
+            <div class="readout-divider"></div>
+            <div class="readout-grid-wide">
+              <div class="readout-row"><span class="readout-key">Total load</span><span class="readout-val" id="tpOutTotal">&mdash;</span></div>
+              <div class="readout-row"><span class="readout-key">Average per phase</span><span class="readout-val" id="tpOutAvg">&mdash;</span></div>
+              <div class="readout-row"><span class="readout-key">Imbalance</span><span class="readout-val" id="tpOutImbalance">&mdash;</span></div>
+              <div class="readout-row"><span class="readout-key">Neutral current (est.)</span><span class="readout-val" id="tpOutNeutral">&mdash;</span></div>
+              <div class="readout-row"><span class="readout-key">Next circuit on</span><span class="readout-val" id="tpOutNext">&mdash;</span></div>
+            </div>
+          </div>
+
+          <div class="phase-bar-wrap" id="tpBars">
+            <div class="phase-bar-item">
+              <div class="phase-bar-label l1">L1</div>
+              <div class="phase-bar-track"><div class="phase-bar-fill l1" id="tpBar1"></div></div>
+              <div class="phase-bar-val" id="tpBarVal1">&mdash;</div>
+            </div>
+            <div class="phase-bar-item">
+              <div class="phase-bar-label l2">L2</div>
+              <div class="phase-bar-track"><div class="phase-bar-fill l2" id="tpBar2"></div></div>
+              <div class="phase-bar-val" id="tpBarVal2">&mdash;</div>
+            </div>
+            <div class="phase-bar-item">
+              <div class="phase-bar-label l3">L3</div>
+              <div class="phase-bar-track"><div class="phase-bar-fill l3" id="tpBar3"></div></div>
+              <div class="phase-bar-val" id="tpBarVal3">&mdash;</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ── Conduit / Trunking Fill Calculator ── -->
+        <div class="calc-card">
+          <div class="card-head">
+            <div class="card-title">
+              <svg class="card-title-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="12" cy="12" r="10"/><path d="M8 12h8M12 8v8"/>
+              </svg>
+              Conduit &amp; Trunking Fill
+            </div>
+            <button id="cfClear" class="btn-clear" type="button">Clear</button>
+          </div>
+          <div class="card-desc">Add cables to calculate total cross-sectional area and required conduit or trunking size.</div>
+
+          <div class="input-grid" style="margin-bottom:0.65rem">
+            <label class="field">
+              <span class="field-label">Containment type</span>
+              <select id="cfType" class="select">
+                <option value="conduit">Round conduit</option>
+                <option value="trunking">Trunking</option>
+              </select>
+            </label>
+          </div>
+
+          <div id="cfCableList">
+            <div class="conduit-cable-row">
+              <label class="field">
+                <span class="field-label">Cable (mm&sup2;)</span>
+                <select class="select cf-cable-size">
+                  <option value="1.0">1.0</option>
+                  <option value="1.5" selected>1.5</option>
+                  <option value="2.5">2.5</option>
+                  <option value="4.0">4.0</option>
+                  <option value="6.0">6.0</option>
+                  <option value="10.0">10.0</option>
+                  <option value="16.0">16.0</option>
+                </select>
+              </label>
+              <label class="field">
+                <span class="field-label">Qty</span>
+                <input class="input cf-cable-qty" type="number" min="1" value="2" inputmode="numeric">
+              </label>
+              <label class="field">
+                <span class="field-label">Type</span>
+                <select class="select cf-cable-type">
+                  <option value="single">Single</option>
+                  <option value="twin_earth">T&amp;E</option>
+                  <option value="three_core">3-core</option>
+                </select>
+              </label>
+            </div>
+          </div>
+          <button class="conduit-add-btn" id="cfAddCable">+ Add cable</button>
+
+          <div id="cfMsg" class="error-banner" hidden></div>
+
+          <div class="readout" style="margin-top:0.85rem">
+            <div class="readout-head">
+              <div class="readout-label">Result</div>
+              <div class="readout-sub">45% max fill rule</div>
+            </div>
+            <div class="readout-divider"></div>
+            <div class="readout-grid-wide">
+              <div class="readout-row"><span class="readout-key">Total cable area</span><span class="readout-val" id="cfOutArea">&mdash;</span></div>
+              <div class="readout-row"><span class="readout-key">Minimum conduit/trunking</span><span class="readout-val" id="cfOutSize">&mdash;</span></div>
+              <div class="readout-row"><span class="readout-key">Fill ratio</span><span class="readout-val" id="cfOutFill">&mdash;</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="calc-grid-2" style="margin-top:1.25rem">
+
+        <!-- ── Pipe Bending Offsets ── -->
+        <div class="calc-card">
+          <div class="card-head">
+            <div class="card-title">
+              <svg class="card-title-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M4 20h4L20 8l-4-4L4 16v4z"/><path d="M13.5 6.5l4 4"/>
+              </svg>
+              Pipe Bending Offsets
+            </div>
+            <button id="pbClear" class="btn-clear" type="button">Clear</button>
+          </div>
+          <div class="card-desc">Calculate bend measurements for conduit offsets. Enter obstacle depth and bend angle.</div>
+
+          <div class="input-grid">
+            <label class="field">
+              <span class="field-label">Obstacle depth (mm)</span>
+              <input id="pbDepth" class="input" inputmode="decimal" placeholder="e.g. 50">
+            </label>
+            <label class="field">
+              <span class="field-label">Bend angle (&deg;)</span>
+              <select id="pbAngle" class="select">
+                <option value="22.5">22.5&deg;</option>
+                <option value="30">30&deg;</option>
+                <option value="45" selected>45&deg;</option>
+                <option value="60">60&deg;</option>
+                <option value="90">90&deg;</option>
+              </select>
+            </label>
+            <label class="field">
+              <span class="field-label">Conduit size (mm)</span>
+              <select id="pbConduit" class="select">
+                <option value="20" selected>20 mm</option>
+                <option value="25">25 mm</option>
+                <option value="32">32 mm</option>
+              </select>
+            </label>
+          </div>
+
+          <div id="pbMsg" class="error-banner" hidden></div>
+
+          <div class="readout" style="margin-top:0.85rem">
+            <div class="readout-head">
+              <div class="readout-label">Offset Measurements</div>
+              <div class="readout-sub">Double offset</div>
+            </div>
+            <div class="readout-divider"></div>
+            <div class="readout-grid-wide">
+              <div class="readout-row"><span class="readout-key">Travel (pipe between bends)</span><span class="readout-val" id="pbOutTravel">&mdash;</span></div>
+              <div class="readout-row"><span class="readout-key">Shrinkage (overall shortening)</span><span class="readout-val" id="pbOutShrink">&mdash;</span></div>
+              <div class="readout-row"><span class="readout-key">Marking distance</span><span class="readout-val" id="pbOutMark">&mdash;</span></div>
+            </div>
+          </div>
+
+          <div class="text-tiny" style="margin-top: 0.55rem;">
+            Travel = depth / sin(angle). Shrinkage = depth / tan(angle). Marking distance = travel between bend marks.
+          </div>
+        </div>
+
+        <!-- ── Unit Converter ── -->
+        <div class="calc-card">
+          <div class="card-head">
+            <div class="card-title">
+              <svg class="card-title-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="17 1 21 5 17 9"/><path d="M3 11V9a4 4 0 014-4h14"/><polyline points="7 23 3 19 7 15"/><path d="M21 13v2a4 4 0 01-4 4H3"/>
+              </svg>
+              Unit Converter
+            </div>
+          </div>
+          <div class="card-desc">Quick conversions for electrical and site work.</div>
+
+          <div class="input-grid">
+            <label class="field">
+              <span class="field-label">Category</span>
+              <select id="ucCategory" class="select">
+                <option value="area">Cable area: mm&sup2; &harr; AWG</option>
+                <option value="power">Power: W &harr; kW &harr; HP</option>
+                <option value="length">Length: m &harr; ft</option>
+                <option value="temp">Temperature: &deg;C &harr; &deg;F</option>
+                <option value="pressure">Pressure: bar &harr; PSI</option>
+                <option value="light">Light: lux &harr; lumens/m&sup2;</option>
+              </select>
+            </label>
+            <label class="field">
+              <span class="field-label">Value</span>
+              <input id="ucValue" class="input" inputmode="decimal" placeholder="Enter value">
+            </label>
+            <label class="field">
+              <span class="field-label">From</span>
+              <select id="ucFrom" class="select"></select>
+            </label>
+          </div>
+
+          <div class="uc-result" id="ucResult">&mdash;</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══ REFERENCE SECTION ═══ -->
+    <section id="reference" class="section-gap">
+      <div class="section-header">
+        <div class="section-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M2 3h6a4 4 0 014 4v14a3 3 0 00-3-3H2z"/><path d="M22 3h-6a4 4 0 00-4 4v14a3 3 0 013-3h7z"/>
+          </svg>
+        </div>
+        <h2 class="section-title">Reference</h2>
+        <div class="section-line"></div>
+      </div>
+
+      <div class="calc-grid-2">
+
+        <!-- ── IP Rating Decoder ── -->
+        <div class="calc-card">
+          <div class="card-head">
+            <div class="card-title">
+              <svg class="card-title-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+              </svg>
+              IP Rating Decoder
+            </div>
+          </div>
+          <div class="card-desc">Enter an IP code to get a plain-English explanation of what each digit means.</div>
+
+          <div class="input-grid">
+            <label class="field">
+              <span class="field-label">First digit (solids)</span>
+              <select id="ipDigit1" class="select">
+                <option value="0">0 &mdash; No protection</option>
+                <option value="1">1 &mdash; Objects &gt; 50 mm</option>
+                <option value="2">2 &mdash; Objects &gt; 12.5 mm (fingers)</option>
+                <option value="3">3 &mdash; Objects &gt; 2.5 mm (tools/wires)</option>
+                <option value="4">4 &mdash; Objects &gt; 1 mm (fine wires)</option>
+                <option value="5">5 &mdash; Dust protected</option>
+                <option value="6">6 &mdash; Dust tight</option>
+              </select>
+            </label>
+            <label class="field">
+              <span class="field-label">Second digit (liquids)</span>
+              <select id="ipDigit2" class="select">
+                <option value="0">0 &mdash; No protection</option>
+                <option value="1">1 &mdash; Dripping water</option>
+                <option value="2">2 &mdash; Dripping (15&deg; tilt)</option>
+                <option value="3">3 &mdash; Spraying water</option>
+                <option value="4">4 &mdash; Splashing water</option>
+                <option value="5">5 &mdash; Water jets</option>
+                <option value="6">6 &mdash; Powerful water jets</option>
+                <option value="7">7 &mdash; Temporary immersion</option>
+                <option value="8">8 &mdash; Continuous immersion</option>
+              </select>
+            </label>
+          </div>
+
+          <div class="ip-display">
+            <span class="ip-digit-box prefix">IP</span>
+            <span class="ip-digit-box d1" id="ipShow1">0</span>
+            <span class="ip-digit-box d2" id="ipShow2">0</span>
+          </div>
+
+          <div class="readout">
+            <div class="readout-head">
+              <div class="readout-label">Explanation</div>
+              <div class="readout-sub" id="ipCode">IP00</div>
+            </div>
+            <div class="readout-divider"></div>
+            <div class="readout-grid" style="grid-template-columns: 1fr">
+              <div class="readout-row"><span class="readout-key">Solids protection</span><span class="readout-val" id="ipOutSolids" style="text-align:right">&mdash;</span></div>
+              <div class="readout-row"><span class="readout-key">Liquids protection</span><span class="readout-val" id="ipOutLiquids" style="text-align:right">&mdash;</span></div>
+              <div class="readout-row"><span class="readout-key">Typical use</span><span class="readout-val" id="ipOutUse" style="text-align:right;color:var(--text-muted);font-family:var(--font-body);font-size:0.8rem">&mdash;</span></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ── Regs Quick Reference ── -->
+        <div class="calc-card">
+          <div class="card-head">
+            <div class="card-title">
+              <svg class="card-title-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M3 3h18v18H3zM3 9h18M3 15h18M9 3v18"/>
+              </svg>
+              Regs Quick Reference
+            </div>
+          </div>
+          <div class="card-desc">Key reference tables from wiring regulations that electricians look up regularly.</div>
+
+          <!-- Disconnection times -->
+          <div class="table-wrap">
+            <div class="table-head">
+              <div class="table-label">Max Disconnection Times</div>
+              <div class="table-sub">BS 7671 Table 41.1</div>
+            </div>
+            <div class="table-divider"></div>
+            <table class="ref-table">
+              <thead><tr><th>Circuit Type</th><th>TN System</th><th>TT System</th></tr></thead>
+              <tbody>
+                <tr><td>Final circuit &le; 32 A</td><td>0.4 s</td><td>0.2 s</td></tr>
+                <tr><td>Final circuit &gt; 32 A</td><td>5 s</td><td>1 s</td></tr>
+                <tr><td>Distribution circuit</td><td>5 s</td><td>1 s</td></tr>
+              </tbody>
+            </table>
+          </div>
+
+          <!-- Min CPC sizes -->
+          <div class="table-wrap" style="margin-top:0.75rem">
+            <div class="table-head">
+              <div class="table-label">Minimum CPC Sizes</div>
+              <div class="table-sub">BS 7671 Table 54.7</div>
+            </div>
+            <div class="table-divider"></div>
+            <table class="ref-table">
+              <thead><tr><th>Line Conductor</th><th>Min CPC (same material)</th><th>Min CPC (different)</th></tr></thead>
+              <tbody>
+                <tr><td>&le; 16 mm&sup2;</td><td>Same as line</td><td>k1/k2 &times; S</td></tr>
+                <tr><td>16 &ndash; 35 mm&sup2;</td><td>16 mm&sup2;</td><td>k1/k2 &times; S</td></tr>
+                <tr><td>&gt; 35 mm&sup2;</td><td>Half of line</td><td>k1/k2 &times; S</td></tr>
+              </tbody>
+            </table>
+          </div>
+
+          <!-- Bathroom zones -->
+          <div class="table-wrap" style="margin-top:0.75rem">
+            <div class="table-head">
+              <div class="table-label">Bathroom Zones &amp; IP Ratings</div>
+              <div class="table-sub">BS 7671 Section 701</div>
+            </div>
+            <div class="table-divider"></div>
+            <table class="ref-table">
+              <thead><tr><th>Zone</th><th>Min IP</th><th>Description</th></tr></thead>
+              <tbody>
+                <tr><td>Zone 0</td><td>IPX7</td><td class="td-muted">Inside bath/shower basin</td></tr>
+                <tr><td>Zone 1</td><td>IPX4</td><td class="td-muted">Above bath/shower to 2.25m height</td></tr>
+                <tr><td>Zone 2</td><td>IPX4</td><td class="td-muted">0.6m around Zone 1</td></tr>
+                <tr><td>Outside zones</td><td>IPX1</td><td class="td-muted">General bathroom area</td></tr>
+              </tbody>
+            </table>
+          </div>
+
+          <!-- Common voltage drop limits -->
+          <div class="table-wrap" style="margin-top:0.75rem">
+            <div class="table-head">
+              <div class="table-label">Voltage Drop Limits</div>
+              <div class="table-sub">BS 7671 Appendix 12</div>
+            </div>
+            <div class="table-divider"></div>
+            <table class="ref-table">
+              <thead><tr><th>Supply Type</th><th>Lighting</th><th>Other</th></tr></thead>
+              <tbody>
+                <tr><td>Public supply</td><td>3%</td><td>5%</td></tr>
+                <tr><td>Private supply</td><td>6%</td><td>8%</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══ JOB NOTES SECTION ═══ -->
+    <section id="job-notes" class="section-gap">
+      <div class="section-header">
+        <div class="section-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/>
+          </svg>
+        </div>
+        <h2 class="section-title">Job Notes</h2>
+        <div class="section-line"></div>
+      </div>
+
+      <div class="calc-card">
+        <div class="card-head">
+          <div class="card-title">
+            <svg class="card-title-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 013 3L7 19l-4 1 1-4L16.5 3.5z"/>
+            </svg>
+            Circuit Test Results
+          </div>
+        </div>
+        <div class="card-desc">
+          Record test results per circuit during an inspection. Not a cert &mdash; a quick way to log readings on site. Export as CSV to use in your reporting.
+        </div>
+
+        <div class="input-grid-wide" style="margin-bottom:0.85rem">
+          <label class="field">
+            <span class="field-label">Job reference</span>
+            <input id="jnJobRef" class="input" placeholder="e.g. 2024-0042">
+          </label>
+          <label class="field">
+            <span class="field-label">Location</span>
+            <input id="jnLocation" class="input" placeholder="e.g. 12 Main St, Dublin">
+          </label>
+          <label class="field">
+            <span class="field-label">Date</span>
+            <input id="jnDate" class="input" type="date">
+          </label>
+          <label class="field">
+            <span class="field-label">Electrician</span>
+            <input id="jnElectrician" class="input" placeholder="Your name">
+          </label>
+        </div>
+
+        <div class="jn-scroll-wrap">
+          <div class="jn-header-row">
+            <span>#</span>
+            <span>Circuit</span>
+            <span>Rp+Re (&Omega;)</span>
+            <span>Zs (&Omega;)</span>
+            <span>IR (M&Omega;)</span>
+            <span>RCD (ms)</span>
+            <span>Notes</span>
+            <span></span>
+          </div>
+          <div id="jnCircuitList">
+            <div class="jn-circuit-row">
+              <div class="jn-row-num">1</div>
+              <input class="input jn-circuit" placeholder="e.g. Lighting">
+              <input class="input jn-rpre" inputmode="decimal" placeholder="0.00">
+              <input class="input jn-zs" inputmode="decimal" placeholder="0.00">
+              <input class="input jn-ir" inputmode="decimal" placeholder="0.00">
+              <input class="input jn-rcd" inputmode="decimal" placeholder="0">
+              <input class="input jn-notes" placeholder="OK">
+              <button class="jn-remove-btn jn-remove">&times;</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="jn-actions">
+          <button class="jn-btn jn-btn-secondary" id="jnAddRow">+ Add Circuit</button>
+          <button class="jn-btn jn-btn-primary" id="jnExport">Export CSV</button>
+          <button class="jn-btn jn-btn-secondary" id="jnClearAll">Clear All</button>
+        </div>
+
+        <div class="text-tiny" style="margin-top: 0.65rem;">
+          Data is kept in your browser only. Export regularly. This is a note-taking aid, not a certification document.
         </div>
       </div>
     </section>
@@ -3407,6 +4144,508 @@
     cableTypeFilter?.addEventListener("change", applyFilters);
     highlightFilter?.addEventListener("change", applyFilters);
     applyFilters();
+  })();
+
+  // ── Cable Length from Rp+Re (reverse) ─────────────
+  (function () {
+    function $(id) { return document.getElementById(id); }
+    function parseNum(v) { const s = String(v ?? "").trim().replaceAll(",", ""); if (!s) return null; const n = Number(s); return Number.isFinite(n) ? n : null; }
+    function showMsg(el, msg) { if (!el) return; if (!msg) { el.hidden = true; el.textContent = ""; return; } el.hidden = false; el.textContent = msg; }
+
+    const RPRE_TABLE = { "1.5": 0.0242, "2.5": 0.0148, "4.0": 0.0092, "6.0": 0.0062, "10.0": 0.0037, "16.0": 0.0023 };
+
+    const val = $("revRpValue"), cable = $("revRpCable"), temp = $("revRpTemp");
+    const clearBtn = $("revRpClear"), msg = $("revRpMsg");
+    const outLength = $("revRpOutLength"), formula = $("revRpFormula");
+
+    function solve() {
+      showMsg(msg, "");
+      const rpre = parseNum(val.value);
+      const size = cable.value;
+      const factor = Number(temp.value || 1);
+      const perM = RPRE_TABLE[size];
+      if (perM === undefined) { outLength.textContent = "\u2014"; formula.textContent = ""; return; }
+      const correctedPerM = +(perM * factor).toFixed(4);
+      if (rpre === null) { outLength.textContent = "\u2014"; formula.textContent = ""; return; }
+      if (rpre <= 0) { showMsg(msg, "Rp+Re must be greater than 0."); outLength.textContent = "\u2014"; formula.textContent = ""; return; }
+      const length = rpre / correctedPerM;
+      outLength.textContent = length.toFixed(1) + " m";
+      formula.textContent = rpre.toFixed(4) + " \u03A9 \u00F7 " + correctedPerM + " \u03A9/m = " + length.toFixed(1) + " m";
+    }
+
+    function clearAll() { val.value = ""; cable.value = "2.5"; temp.value = "1"; solve(); }
+    for (const el of [val, cable, temp]) { el?.addEventListener("input", solve); el?.addEventListener("change", solve); }
+    clearBtn?.addEventListener("click", clearAll);
+    solve();
+  })();
+
+  // ── Three-Phase Load Balancing ────────────────────
+  (function () {
+    function $(id) { return document.getElementById(id); }
+    function parseNum(v) { const s = String(v ?? "").trim().replaceAll(",", ""); if (!s) return null; const n = Number(s); return Number.isFinite(n) ? n : null; }
+
+    const l1 = $("tpL1"), l2 = $("tpL2"), l3 = $("tpL3");
+    const outTotal = $("tpOutTotal"), outAvg = $("tpOutAvg"), outImbalance = $("tpOutImbalance");
+    const outNeutral = $("tpOutNeutral"), outNext = $("tpOutNext"), status = $("tpStatus");
+    const bar1 = $("tpBar1"), bar2 = $("tpBar2"), bar3 = $("tpBar3");
+    const barVal1 = $("tpBarVal1"), barVal2 = $("tpBarVal2"), barVal3 = $("tpBarVal3");
+    const clearBtn = $("tpClear");
+
+    function solve() {
+      const a = parseNum(l1.value) || 0;
+      const b = parseNum(l2.value) || 0;
+      const c = parseNum(l3.value) || 0;
+      if (a === 0 && b === 0 && c === 0) {
+        outTotal.textContent = "\u2014"; outAvg.textContent = "\u2014"; outImbalance.textContent = "\u2014";
+        outNeutral.textContent = "\u2014"; outNext.textContent = "\u2014"; status.textContent = "\u2014";
+        bar1.style.width = "0%"; bar2.style.width = "0%"; bar3.style.width = "0%";
+        barVal1.textContent = "\u2014"; barVal2.textContent = "\u2014"; barVal3.textContent = "\u2014";
+        return;
+      }
+      const total = a + b + c;
+      const avg = total / 3;
+      const maxPhase = Math.max(a, b, c);
+      const minPhase = Math.min(a, b, c);
+      const imbalance = avg > 0 ? ((maxPhase - minPhase) / avg * 100) : 0;
+
+      // Approximate neutral current for unbalanced load (simplified vector sum)
+      const rad120 = 2 * Math.PI / 3;
+      const nReal = a + b * Math.cos(rad120) + c * Math.cos(2 * rad120);
+      const nImag = b * Math.sin(rad120) + c * Math.sin(2 * rad120);
+      const neutralI = Math.sqrt(nReal * nReal + nImag * nImag);
+
+      outTotal.textContent = total.toFixed(1) + " A";
+      outAvg.textContent = avg.toFixed(1) + " A";
+      outImbalance.textContent = imbalance.toFixed(1) + "%";
+      outNeutral.textContent = neutralI.toFixed(1) + " A";
+
+      if (imbalance <= 10) status.textContent = "Good balance";
+      else if (imbalance <= 20) status.textContent = "Acceptable";
+      else status.textContent = "Poor balance";
+
+      // Which phase to load next
+      const phases = [{ name: "L1", val: a }, { name: "L2", val: b }, { name: "L3", val: c }];
+      phases.sort((x, y) => x.val - y.val);
+      outNext.textContent = phases[0].name + " (" + phases[0].val.toFixed(1) + " A)";
+
+      // Bars
+      const barMax = maxPhase > 0 ? maxPhase : 1;
+      bar1.style.width = (a / barMax * 100) + "%";
+      bar2.style.width = (b / barMax * 100) + "%";
+      bar3.style.width = (c / barMax * 100) + "%";
+      barVal1.textContent = a.toFixed(1) + " A";
+      barVal2.textContent = b.toFixed(1) + " A";
+      barVal3.textContent = c.toFixed(1) + " A";
+    }
+
+    function clearAll() { l1.value = ""; l2.value = ""; l3.value = ""; solve(); }
+    for (const el of [l1, l2, l3]) el?.addEventListener("input", solve);
+    clearBtn?.addEventListener("click", clearAll);
+    solve();
+  })();
+
+  // ── Conduit & Trunking Fill Calculator ────────────
+  (function () {
+    function $(id) { return document.getElementById(id); }
+    function showMsg(el, msg) { if (!el) return; if (!msg) { el.hidden = true; el.textContent = ""; return; } el.hidden = false; el.textContent = msg; }
+
+    // Overall cable diameter (mm) approximations for conductor + insulation
+    // For singles, T&E, and 3-core
+    const CABLE_OD = {
+      single:     { 1.0: 3.0, 1.5: 3.5, 2.5: 4.2, 4.0: 5.0, 6.0: 5.8, 10.0: 7.5, 16.0: 9.0 },
+      twin_earth: { 1.0: 8.0, 1.5: 9.0, 2.5: 10.5, 4.0: 11.5, 6.0: 13.0, 10.0: 15.5, 16.0: 18.0 },
+      three_core: { 1.0: 8.5, 1.5: 9.5, 2.5: 11.0, 4.0: 12.5, 6.0: 14.0, 10.0: 17.0, 16.0: 20.0 }
+    };
+
+    // Standard conduit internal areas (mm²) and trunking sizes
+    const CONDUIT_SIZES = [
+      { label: "20 mm", internalD: 16.1 },
+      { label: "25 mm", internalD: 21.1 },
+      { label: "32 mm", internalD: 27.3 }
+    ];
+    const TRUNKING_SIZES = [
+      { label: "25 \u00D7 16 mm", area: 400 },
+      { label: "38 \u00D7 16 mm", area: 608 },
+      { label: "38 \u00D7 25 mm", area: 950 },
+      { label: "50 \u00D7 25 mm", area: 1250 },
+      { label: "50 \u00D7 38 mm", area: 1900 },
+      { label: "75 \u00D7 25 mm", area: 1875 },
+      { label: "75 \u00D7 38 mm", area: 2850 },
+      { label: "75 \u00D7 50 mm", area: 3750 },
+      { label: "100 \u00D7 50 mm", area: 5000 },
+      { label: "100 \u00D7 75 mm", area: 7500 },
+      { label: "150 \u00D7 50 mm", area: 7500 },
+      { label: "150 \u00D7 75 mm", area: 11250 }
+    ];
+    const MAX_FILL = 0.45;
+
+    const cableList = $("cfCableList"), addBtn = $("cfAddCable");
+    const cfType = $("cfType"), cfMsg = $("cfMsg");
+    const outArea = $("cfOutArea"), outSize = $("cfOutSize"), outFill = $("cfOutFill");
+    const clearBtn = $("cfClear");
+
+    function addRow() {
+      const row = document.createElement("div");
+      row.className = "conduit-cable-row";
+      row.innerHTML = '<label class="field"><span class="field-label">Cable (mm\u00B2)</span><select class="select cf-cable-size"><option value="1.0">1.0</option><option value="1.5" selected>1.5</option><option value="2.5">2.5</option><option value="4.0">4.0</option><option value="6.0">6.0</option><option value="10.0">10.0</option><option value="16.0">16.0</option></select></label><label class="field"><span class="field-label">Qty</span><input class="input cf-cable-qty" type="number" min="1" value="1" inputmode="numeric"></label><label class="field"><span class="field-label">Type</span><select class="select cf-cable-type"><option value="single">Single</option><option value="twin_earth">T&E</option><option value="three_core">3-core</option></select></label><button class="conduit-remove-btn cf-remove">\u00D7 Remove</button>';
+      cableList.appendChild(row);
+      bindRow(row);
+      solve();
+    }
+
+    function bindRow(row) {
+      row.querySelector(".cf-remove")?.addEventListener("click", () => {
+        if (cableList.children.length > 1) { row.remove(); solve(); }
+      });
+      row.querySelectorAll("input, select").forEach(el => {
+        el.addEventListener("input", solve);
+        el.addEventListener("change", solve);
+      });
+    }
+
+    function solve() {
+      showMsg(cfMsg, "");
+      let totalArea = 0;
+      const rows = cableList.querySelectorAll(".conduit-cable-row");
+      for (const row of rows) {
+        const size = row.querySelector(".cf-cable-size")?.value;
+        const qty = Number(row.querySelector(".cf-cable-qty")?.value) || 0;
+        const type = row.querySelector(".cf-cable-type")?.value || "single";
+        const od = CABLE_OD[type]?.[Number(size)];
+        if (!od || qty <= 0) continue;
+        const cableArea = Math.PI * (od / 2) * (od / 2);
+        totalArea += cableArea * qty;
+      }
+
+      if (totalArea <= 0) { outArea.textContent = "\u2014"; outSize.textContent = "\u2014"; outFill.textContent = "\u2014"; return; }
+
+      outArea.textContent = totalArea.toFixed(0) + " mm\u00B2";
+      const requiredArea = totalArea / MAX_FILL;
+
+      if (cfType.value === "conduit") {
+        let found = null;
+        for (const c of CONDUIT_SIZES) {
+          const area = Math.PI * (c.internalD / 2) * (c.internalD / 2);
+          const fill = totalArea / area;
+          if (fill <= MAX_FILL) { found = { label: c.label, area, fill }; break; }
+        }
+        if (found) {
+          outSize.textContent = found.label + " conduit";
+          outFill.textContent = (found.fill * 100).toFixed(0) + "%";
+        } else {
+          outSize.textContent = "Exceeds 32 mm";
+          outFill.textContent = "> 45%";
+          showMsg(cfMsg, "Cable fill exceeds largest standard conduit. Consider trunking or multiple runs.");
+        }
+      } else {
+        let found = null;
+        for (const t of TRUNKING_SIZES) {
+          const fill = totalArea / t.area;
+          if (fill <= MAX_FILL) { found = { label: t.label, area: t.area, fill }; break; }
+        }
+        if (found) {
+          outSize.textContent = found.label + " trunking";
+          outFill.textContent = (found.fill * 100).toFixed(0) + "%";
+        } else {
+          outSize.textContent = "Exceeds table";
+          outFill.textContent = "> 45%";
+          showMsg(cfMsg, "Cable fill exceeds largest trunking in table. Consider larger or multiple trunking runs.");
+        }
+      }
+    }
+
+    function clearAll() {
+      cfType.value = "conduit";
+      cableList.innerHTML = '<div class="conduit-cable-row"><label class="field"><span class="field-label">Cable (mm\u00B2)</span><select class="select cf-cable-size"><option value="1.0">1.0</option><option value="1.5" selected>1.5</option><option value="2.5">2.5</option><option value="4.0">4.0</option><option value="6.0">6.0</option><option value="10.0">10.0</option><option value="16.0">16.0</option></select></label><label class="field"><span class="field-label">Qty</span><input class="input cf-cable-qty" type="number" min="1" value="2" inputmode="numeric"></label><label class="field"><span class="field-label">Type</span><select class="select cf-cable-type"><option value="single">Single</option><option value="twin_earth">T&E</option><option value="three_core">3-core</option></select></label></div>';
+      bindRow(cableList.children[0]);
+      solve();
+    }
+
+    addBtn?.addEventListener("click", addRow);
+    cfType?.addEventListener("change", solve);
+    clearBtn?.addEventListener("click", clearAll);
+    // Bind initial row
+    cableList.querySelectorAll(".conduit-cable-row").forEach(bindRow);
+    solve();
+  })();
+
+  // ── Pipe Bending Offsets ──────────────────────────
+  (function () {
+    function $(id) { return document.getElementById(id); }
+    function parseNum(v) { const s = String(v ?? "").trim().replaceAll(",", ""); if (!s) return null; const n = Number(s); return Number.isFinite(n) ? n : null; }
+    function showMsg(el, msg) { if (!el) return; if (!msg) { el.hidden = true; el.textContent = ""; return; } el.hidden = false; el.textContent = msg; }
+
+    const depth = $("pbDepth"), angle = $("pbAngle"), conduit = $("pbConduit");
+    const msg = $("pbMsg");
+    const outTravel = $("pbOutTravel"), outShrink = $("pbOutShrink"), outMark = $("pbOutMark");
+    const clearBtn = $("pbClear");
+
+    function solve() {
+      showMsg(msg, "");
+      const d = parseNum(depth.value);
+      const a = Number(angle.value);
+      if (d === null || d <= 0) {
+        outTravel.textContent = "\u2014"; outShrink.textContent = "\u2014"; outMark.textContent = "\u2014";
+        return;
+      }
+      const rad = a * Math.PI / 180;
+      const travel = d / Math.sin(rad);
+      const shrinkage = d / Math.tan(rad);
+      // Marking distance is travel between the two bend points
+      const marking = travel;
+      outTravel.textContent = travel.toFixed(1) + " mm";
+      outShrink.textContent = shrinkage.toFixed(1) + " mm";
+      outMark.textContent = marking.toFixed(1) + " mm";
+    }
+
+    function clearAll() { depth.value = ""; angle.value = "45"; conduit.value = "20"; solve(); }
+    for (const el of [depth, angle, conduit]) { el?.addEventListener("input", solve); el?.addEventListener("change", solve); }
+    clearBtn?.addEventListener("click", clearAll);
+    solve();
+  })();
+
+  // ── Unit Converter ────────────────────────────────
+  (function () {
+    function $(id) { return document.getElementById(id); }
+    function parseNum(v) { const s = String(v ?? "").trim().replaceAll(",", ""); if (!s) return null; const n = Number(s); return Number.isFinite(n) ? n : null; }
+
+    const AWG_TO_MM2 = [
+      { awg: "18", mm2: 0.75 }, { awg: "16", mm2: 1.0 }, { awg: "14", mm2: 1.5 },
+      { awg: "12", mm2: 2.5 }, { awg: "10", mm2: 4.0 }, { awg: "8", mm2: 6.0 },
+      { awg: "6", mm2: 10.0 }, { awg: "4", mm2: 16.0 }, { awg: "2", mm2: 25.0 },
+      { awg: "1", mm2: 35.0 }, { awg: "1/0", mm2: 50.0 }, { awg: "2/0", mm2: 70.0 },
+      { awg: "3/0", mm2: 95.0 }
+    ];
+
+    const CATEGORIES = {
+      area: {
+        units: [{ id: "mm2", label: "mm\u00B2" }, { id: "awg", label: "AWG (approx)" }],
+        convert: function (val, from) {
+          if (from === "mm2") {
+            let closest = AWG_TO_MM2.reduce((best, item) => Math.abs(item.mm2 - val) < Math.abs(best.mm2 - val) ? item : best);
+            return "AWG " + closest.awg + " (\u2248 " + closest.mm2 + " mm\u00B2)";
+          } else {
+            let closest = AWG_TO_MM2.find(item => item.awg === String(Math.round(val)));
+            return closest ? closest.mm2 + " mm\u00B2 (AWG " + closest.awg + ")" : "No match";
+          }
+        }
+      },
+      power: {
+        units: [{ id: "w", label: "Watts" }, { id: "kw", label: "Kilowatts" }, { id: "hp", label: "Horsepower" }],
+        convert: function (val, from) {
+          let watts = from === "w" ? val : from === "kw" ? val * 1000 : val * 745.7;
+          return watts.toFixed(1) + " W = " + (watts / 1000).toFixed(3) + " kW = " + (watts / 745.7).toFixed(3) + " HP";
+        }
+      },
+      length: {
+        units: [{ id: "m", label: "Metres" }, { id: "ft", label: "Feet" }],
+        convert: function (val, from) {
+          if (from === "m") return (val * 3.28084).toFixed(2) + " ft";
+          return (val / 3.28084).toFixed(2) + " m";
+        }
+      },
+      temp: {
+        units: [{ id: "c", label: "\u00B0C" }, { id: "f", label: "\u00B0F" }],
+        convert: function (val, from) {
+          if (from === "c") return ((val * 9 / 5) + 32).toFixed(1) + " \u00B0F";
+          return ((val - 32) * 5 / 9).toFixed(1) + " \u00B0C";
+        }
+      },
+      pressure: {
+        units: [{ id: "bar", label: "Bar" }, { id: "psi", label: "PSI" }],
+        convert: function (val, from) {
+          if (from === "bar") return (val * 14.5038).toFixed(2) + " PSI";
+          return (val / 14.5038).toFixed(3) + " bar";
+        }
+      },
+      light: {
+        units: [{ id: "lux", label: "Lux" }, { id: "lm_m2", label: "Lumens/m\u00B2" }],
+        convert: function (val, from) {
+          return val.toFixed(1) + (from === "lux" ? " lm/m\u00B2" : " lux") + " (1 lux = 1 lm/m\u00B2)";
+        }
+      }
+    };
+
+    const category = $("ucCategory"), value = $("ucValue"), fromSel = $("ucFrom"), result = $("ucResult");
+
+    function populateFrom() {
+      const cat = CATEGORIES[category.value];
+      fromSel.innerHTML = cat.units.map(u => '<option value="' + u.id + '">' + u.label + '</option>').join("");
+      solve();
+    }
+
+    function solve() {
+      const val = parseNum(value.value);
+      if (val === null) { result.textContent = "\u2014"; return; }
+      const cat = CATEGORIES[category.value];
+      result.textContent = cat.convert(val, fromSel.value);
+    }
+
+    category?.addEventListener("change", populateFrom);
+    fromSel?.addEventListener("change", solve);
+    value?.addEventListener("input", solve);
+    populateFrom();
+  })();
+
+  // ── IP Rating Decoder ─────────────────────────────
+  (function () {
+    function $(id) { return document.getElementById(id); }
+
+    const SOLIDS = {
+      0: "No protection against solid objects",
+      1: "Protected against objects > 50 mm (e.g. hand)",
+      2: "Protected against objects > 12.5 mm (e.g. fingers)",
+      3: "Protected against objects > 2.5 mm (e.g. tools, thick wires)",
+      4: "Protected against objects > 1 mm (e.g. fine wires, screws)",
+      5: "Dust protected \u2014 limited ingress permitted, no harmful deposits",
+      6: "Dust tight \u2014 no ingress of dust"
+    };
+
+    const LIQUIDS = {
+      0: "No protection against liquids",
+      1: "Protected against vertically falling drops of water",
+      2: "Protected against drops of water falling at up to 15\u00B0 from vertical",
+      3: "Protected against spraying water at up to 60\u00B0 from vertical",
+      4: "Protected against splashing water from any direction",
+      5: "Protected against water jets from any direction (12.5 l/min)",
+      6: "Protected against powerful water jets (100 l/min)",
+      7: "Protected against temporary immersion (up to 1 m for 30 min)",
+      8: "Protected against continuous immersion (depth specified by manufacturer)"
+    };
+
+    const USES = {
+      "00": "No protection \u2014 indoor controlled environments only",
+      "20": "Indoor use, finger-safe \u2014 dry locations",
+      "21": "Sheltered outdoor \u2014 drip-proof",
+      "44": "Industrial indoor \u2014 tool-safe, splash-proof",
+      "54": "Outdoor general \u2014 dust-protected, splash-proof",
+      "55": "Outdoor exposed \u2014 dust-protected, jet-proof",
+      "65": "Outdoor harsh \u2014 dust-tight, jet-proof",
+      "66": "Marine / washdown \u2014 dust-tight, powerful jets",
+      "67": "Submersible (temporary) \u2014 dust-tight",
+      "68": "Submersible (continuous) \u2014 dust-tight"
+    };
+
+    const d1 = $("ipDigit1"), d2 = $("ipDigit2");
+    const show1 = $("ipShow1"), show2 = $("ipShow2"), code = $("ipCode");
+    const outSolids = $("ipOutSolids"), outLiquids = $("ipOutLiquids"), outUse = $("ipOutUse");
+
+    function solve() {
+      const v1 = d1.value, v2 = d2.value;
+      show1.textContent = v1; show2.textContent = v2;
+      code.textContent = "IP" + v1 + v2;
+      outSolids.textContent = SOLIDS[v1] || "\u2014";
+      outLiquids.textContent = LIQUIDS[v2] || "\u2014";
+      const useKey = v1 + v2;
+      // Find best match or give generic description
+      if (USES[useKey]) {
+        outUse.textContent = USES[useKey];
+      } else {
+        const d1n = Number(v1), d2n = Number(v2);
+        if (d1n >= 5 && d2n >= 5) outUse.textContent = "Suitable for outdoor / exposed environments";
+        else if (d1n >= 4 && d2n >= 4) outUse.textContent = "Suitable for industrial / semi-exposed environments";
+        else if (d1n >= 2 && d2n >= 1) outUse.textContent = "Suitable for general indoor use";
+        else outUse.textContent = "Limited protection \u2014 controlled environments only";
+      }
+    }
+
+    d1?.addEventListener("change", solve);
+    d2?.addEventListener("change", solve);
+    solve();
+  })();
+
+  // ── Job Notes ─────────────────────────────────────
+  (function () {
+    function $(id) { return document.getElementById(id); }
+    const list = $("jnCircuitList");
+    const addBtn = $("jnAddRow"), exportBtn = $("jnExport"), clearBtn = $("jnClearAll");
+    let rowCount = 1;
+
+    function addRow() {
+      rowCount++;
+      const row = document.createElement("div");
+      row.className = "jn-circuit-row";
+      row.innerHTML = '<div class="jn-row-num">' + rowCount + '</div>' +
+        '<input class="input jn-circuit" placeholder="e.g. Sockets">' +
+        '<input class="input jn-rpre" inputmode="decimal" placeholder="0.00">' +
+        '<input class="input jn-zs" inputmode="decimal" placeholder="0.00">' +
+        '<input class="input jn-ir" inputmode="decimal" placeholder="0.00">' +
+        '<input class="input jn-rcd" inputmode="decimal" placeholder="0">' +
+        '<input class="input jn-notes" placeholder="OK">' +
+        '<button class="jn-remove-btn jn-remove">\u00D7</button>';
+      list.appendChild(row);
+      row.querySelector(".jn-remove").addEventListener("click", () => {
+        if (list.children.length > 1) { row.remove(); renumber(); }
+      });
+    }
+
+    function renumber() {
+      const rows = list.querySelectorAll(".jn-circuit-row");
+      rows.forEach((r, i) => {
+        const num = r.querySelector(".jn-row-num");
+        if (num) num.textContent = i + 1;
+      });
+      rowCount = rows.length;
+    }
+
+    function exportCSV() {
+      const jobRef = $("jnJobRef")?.value || "";
+      const location = $("jnLocation")?.value || "";
+      const date = $("jnDate")?.value || "";
+      const electrician = $("jnElectrician")?.value || "";
+
+      let csv = "Job Reference," + csvEsc(jobRef) + "\n";
+      csv += "Location," + csvEsc(location) + "\n";
+      csv += "Date," + csvEsc(date) + "\n";
+      csv += "Electrician," + csvEsc(electrician) + "\n\n";
+      csv += "#,Circuit,Rp+Re (ohms),Zs (ohms),IR (MOhms),RCD (ms),Notes\n";
+
+      const rows = list.querySelectorAll(".jn-circuit-row");
+      rows.forEach((r, i) => {
+        const circuit = r.querySelector(".jn-circuit")?.value || "";
+        const rpre = r.querySelector(".jn-rpre")?.value || "";
+        const zs = r.querySelector(".jn-zs")?.value || "";
+        const ir = r.querySelector(".jn-ir")?.value || "";
+        const rcd = r.querySelector(".jn-rcd")?.value || "";
+        const notes = r.querySelector(".jn-notes")?.value || "";
+        csv += (i + 1) + "," + csvEsc(circuit) + "," + csvEsc(rpre) + "," + csvEsc(zs) + "," + csvEsc(ir) + "," + csvEsc(rcd) + "," + csvEsc(notes) + "\n";
+      });
+
+      const blob = new Blob([csv], { type: "text/csv" });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = "test-results-" + (date || "export") + ".csv";
+      a.click();
+      URL.revokeObjectURL(url);
+    }
+
+    function csvEsc(s) {
+      if (s.includes(",") || s.includes('"') || s.includes("\n")) return '"' + s.replace(/"/g, '""') + '"';
+      return s;
+    }
+
+    function clearAll() {
+      $("jnJobRef").value = ""; $("jnLocation").value = ""; $("jnDate").value = ""; $("jnElectrician").value = "";
+      list.innerHTML = '<div class="jn-circuit-row"><div class="jn-row-num">1</div><input class="input jn-circuit" placeholder="e.g. Lighting"><input class="input jn-rpre" inputmode="decimal" placeholder="0.00"><input class="input jn-zs" inputmode="decimal" placeholder="0.00"><input class="input jn-ir" inputmode="decimal" placeholder="0.00"><input class="input jn-rcd" inputmode="decimal" placeholder="0"><input class="input jn-notes" placeholder="OK"><button class="jn-remove-btn jn-remove">\u00D7</button></div>';
+      rowCount = 1;
+      list.querySelector(".jn-remove")?.addEventListener("click", () => {});
+    }
+
+    // Bind initial remove button
+    list.querySelector(".jn-remove")?.addEventListener("click", () => {
+      if (list.children.length > 1) { list.children[0].remove(); renumber(); }
+    });
+
+    // Set default date to today
+    const dateInput = $("jnDate");
+    if (dateInput && !dateInput.value) {
+      dateInput.value = new Date().toISOString().split("T")[0];
+    }
+
+    addBtn?.addEventListener("click", addRow);
+    exportBtn?.addEventListener("click", exportCSV);
+    clearBtn?.addEventListener("click", clearAll);
   })();
 
   // ── Active nav highlight on scroll ──────────────────
