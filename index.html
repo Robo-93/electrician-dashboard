@@ -946,6 +946,69 @@
       box-shadow: 0 0 0 3px rgba(245,158,11,0.08);
     }
 
+    /* ── Pass/Fail Badge ────────────────────────────── */
+    .badge {
+      display: inline-block;
+      font-family: var(--font-heading);
+      font-size: 0.72rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      padding: 0.2rem 0.55rem;
+      border-radius: 999px;
+    }
+    .badge-pass {
+      color: #22c55e;
+      background: rgba(34,197,94,0.12);
+      border: 1px solid rgba(34,197,94,0.25);
+    }
+    .badge-fail {
+      color: var(--red);
+      background: var(--red-bg);
+      border: 1px solid var(--red-border);
+    }
+    .badge-warn {
+      color: var(--amber);
+      background: var(--amber-dim);
+      border: 1px solid rgba(245,158,11,0.25);
+    }
+
+    /* ── Zs / Fault Section ─────────────────────────── */
+    .zs-result-big {
+      text-align: center;
+      padding: 1rem;
+      margin-top: 0.85rem;
+      background: var(--bg-inset);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      transition: border-color 0.3s ease;
+    }
+    .zs-result-big.pass { border-color: rgba(34,197,94,0.3); }
+    .zs-result-big.fail { border-color: var(--red-border); }
+    .zs-result-big .zs-verdict {
+      font-family: var(--font-mono);
+      font-size: 1.4rem;
+      font-weight: 700;
+      margin-bottom: 0.25rem;
+    }
+    .zs-result-big .zs-detail {
+      font-size: 0.78rem;
+      color: var(--text-muted);
+    }
+    .zs-result-big.pass .zs-verdict { color: #22c55e; }
+    .zs-result-big.fail .zs-verdict { color: var(--red); }
+
+    /* ── Cable Ref Filters ──────────────────────────── */
+    .cref-filters {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-bottom: 1rem;
+      align-items: end;
+    }
+    .cref-filters .field { min-width: 10rem; }
+    .cref-highlight { background: rgba(245,158,11,0.08) !important; }
+
     /* ── Mobile adjustments ───────────────────────── */
     @media (max-width: 480px) {
       .header-inner { padding: 0 0.75rem; }
@@ -961,6 +1024,8 @@
       .csa-tpl-btn { font-size: 0.68rem; padding: 0.35rem 0.55rem; }
       .csa-mode-tab { font-size: 0.76rem; padding: 0.4rem 0.75rem; }
       .csa-layout { grid-template-columns: 1fr; }
+      .cref-filters { flex-direction: column; }
+      .cref-filters .field { min-width: 100%; }
     }
   </style>
 </head>
@@ -981,6 +1046,8 @@
         <a class="nav-link" href="#electricity-cost">Elec. Cost</a>
         <a class="nav-link" href="#testing">Testing</a>
         <a class="nav-link" href="#circuit-sizing">Sizing</a>
+        <a class="nav-link" href="#fault-protection">Fault</a>
+        <a class="nav-link" href="#cable-ref">Cable Ref</a>
       </nav>
     </div>
   </header>
@@ -1758,6 +1825,386 @@
             </button>
             <div class="csa-working-body" id="csaWorkingBody"></div>
           </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══ FAULT PROTECTION SECTION ═══ -->
+    <section id="fault-protection" class="section-gap">
+      <div class="section-header">
+        <div class="section-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+          </svg>
+        </div>
+        <h2 class="section-title">Fault Protection</h2>
+        <div class="section-line"></div>
+      </div>
+
+      <div class="calc-grid-2">
+
+        <!-- ── Zs Max Lookup ── -->
+        <div class="calc-card">
+          <div class="card-head">
+            <div class="card-title">
+              <svg class="card-title-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11"/>
+              </svg>
+              Zs Max Lookup
+            </div>
+            <button id="zsClear" class="btn-clear" type="button">Clear</button>
+          </div>
+          <div class="card-desc">Maximum earth fault loop impedance for circuit breakers. Enter measured Zs to check pass/fail.</div>
+
+          <div class="input-grid">
+            <label class="field">
+              <span class="field-label">Device type</span>
+              <select id="zsDevice" class="select">
+                <option value="mcb">MCB / RCBO</option>
+                <option value="bsen_fuse">BS EN 60898 Fuse</option>
+              </select>
+            </label>
+            <label class="field">
+              <span class="field-label">Curve</span>
+              <select id="zsCurve" class="select">
+                <option value="B">Type B</option>
+                <option value="C">Type C</option>
+                <option value="D">Type D</option>
+              </select>
+            </label>
+            <label class="field">
+              <span class="field-label">Rating (A)</span>
+              <select id="zsRating" class="select">
+                <option value="6">6 A</option>
+                <option value="10">10 A</option>
+                <option value="16">16 A</option>
+                <option value="20">20 A</option>
+                <option value="25">25 A</option>
+                <option value="32">32 A</option>
+                <option value="40">40 A</option>
+                <option value="50">50 A</option>
+                <option value="63">63 A</option>
+              </select>
+            </label>
+            <label class="field">
+              <span class="field-label">Disconnection time</span>
+              <select id="zsTime" class="select">
+                <option value="0.4">0.4s (final circuits &le; 32 A)</option>
+                <option value="5">5s (distribution circuits)</option>
+              </select>
+            </label>
+            <label class="field">
+              <span class="field-label">Measured Zs (&Omega;) &mdash; optional</span>
+              <input id="zsMeasured" class="input" inputmode="decimal" placeholder="e.g. 0.85">
+            </label>
+          </div>
+
+          <div id="zsMsg" class="error-banner" hidden></div>
+
+          <div class="readout">
+            <div class="readout-head">
+              <div class="readout-label">Maximum Zs</div>
+              <div class="readout-sub">BS 7671 / ET101</div>
+            </div>
+            <div class="readout-divider"></div>
+            <div class="readout-grid">
+              <div class="readout-row"><span class="readout-key">Zs max</span><span class="readout-val" id="zsOutMax">&mdash;</span></div>
+              <div class="readout-row"><span class="readout-key">80% of max</span><span class="readout-val" id="zsOut80">&mdash;</span></div>
+            </div>
+          </div>
+
+          <div class="zs-result-big" id="zsVerdict" style="display:none">
+            <div class="zs-verdict" id="zsVerdictText"></div>
+            <div class="zs-detail" id="zsVerdictDetail"></div>
+          </div>
+
+          <div class="text-tiny" style="margin-top: 0.55rem;">
+            80% rule: measured Zs should not exceed 80% of tabulated max to account for temperature rise during fault conditions.
+          </div>
+        </div>
+
+        <!-- ── Disconnection Time / Fault Loop Calculator ── -->
+        <div class="calc-card">
+          <div class="card-head">
+            <div class="card-title">
+              <svg class="card-title-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/>
+              </svg>
+              Disconnection Time Check
+            </div>
+            <button id="dtClear" class="btn-clear" type="button">Clear</button>
+          </div>
+          <div class="card-desc">Check if fault current is sufficient for disconnection within required time. Enter Zs and device details.</div>
+
+          <div class="input-grid">
+            <label class="field">
+              <span class="field-label">Supply voltage (V)</span>
+              <input id="dtVoltage" class="input" inputmode="decimal" value="230" placeholder="230">
+            </label>
+            <label class="field">
+              <span class="field-label">Measured Zs (&Omega;)</span>
+              <input id="dtZs" class="input" inputmode="decimal" placeholder="e.g. 1.2">
+            </label>
+            <label class="field">
+              <span class="field-label">Device type</span>
+              <select id="dtDevice" class="select">
+                <option value="mcb">MCB / RCBO</option>
+                <option value="bsen_fuse">BS EN 60898 Fuse</option>
+              </select>
+            </label>
+            <label class="field">
+              <span class="field-label">Curve</span>
+              <select id="dtCurve" class="select">
+                <option value="B">Type B</option>
+                <option value="C">Type C</option>
+                <option value="D">Type D</option>
+              </select>
+            </label>
+            <label class="field">
+              <span class="field-label">Rating (A)</span>
+              <select id="dtRating" class="select">
+                <option value="6">6 A</option>
+                <option value="10">10 A</option>
+                <option value="16">16 A</option>
+                <option value="20">20 A</option>
+                <option value="25">25 A</option>
+                <option value="32">32 A</option>
+                <option value="40">40 A</option>
+                <option value="50">50 A</option>
+                <option value="63">63 A</option>
+              </select>
+            </label>
+            <label class="field">
+              <span class="field-label">Required disconnection</span>
+              <select id="dtTime" class="select">
+                <option value="0.4">0.4s (final circuits &le; 32 A)</option>
+                <option value="5">5s (distribution circuits)</option>
+              </select>
+            </label>
+          </div>
+
+          <div id="dtMsg" class="error-banner" hidden></div>
+
+          <div class="readout">
+            <div class="readout-head">
+              <div class="readout-label">Results</div>
+              <div class="readout-sub">Fault loop analysis</div>
+            </div>
+            <div class="readout-divider"></div>
+            <div class="readout-grid-wide">
+              <div class="readout-row"><span class="readout-key">Prospective fault current (Ipf)</span><span class="readout-val" id="dtOutIpf">&mdash;</span></div>
+              <div class="readout-row"><span class="readout-key">Required for 0.4s trip</span><span class="readout-val" id="dtOutReq04">&mdash;</span></div>
+              <div class="readout-row"><span class="readout-key">Required for 5s trip</span><span class="readout-val" id="dtOutReq5">&mdash;</span></div>
+              <div class="readout-row"><span class="readout-key">Zs max for selected time</span><span class="readout-val" id="dtOutZsMax">&mdash;</span></div>
+            </div>
+          </div>
+
+          <div class="zs-result-big" id="dtVerdict" style="display:none">
+            <div class="zs-verdict" id="dtVerdictText"></div>
+            <div class="zs-detail" id="dtVerdictDetail"></div>
+          </div>
+
+          <div class="text-tiny" style="margin-top: 0.55rem;">
+            Ipf = Uo / Zs. MCB instantaneous trip: Type B = 5&times;In, Type C = 10&times;In, Type D = 20&times;In.
+          </div>
+        </div>
+      </div>
+
+      <!-- Zs Max Reference Table -->
+      <div class="calc-grid-full">
+        <div class="calc-card">
+          <div class="card-head">
+            <div class="card-title">
+              <svg class="card-title-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M3 3h18v18H3zM3 9h18M3 15h18M9 3v18M15 3v18"/>
+              </svg>
+              Zs Max Reference Table (MCB)
+            </div>
+          </div>
+          <div class="card-desc">
+            Maximum earth fault loop impedance (&Omega;) for MCBs to BS EN 60898. Values shown at 0.4s and 5s disconnection times.
+          </div>
+
+          <div class="table-wrap">
+            <div class="table-head">
+              <div class="table-label">0.4s Disconnection (Final Circuits &le; 32 A)</div>
+              <div class="table-sub">BS 7671 Table 41.3</div>
+            </div>
+            <div class="table-divider"></div>
+            <table class="ref-table" id="zsRefTable04">
+              <thead>
+                <tr>
+                  <th>Rating</th>
+                  <th>Type B</th>
+                  <th>Type C</th>
+                  <th>Type D</th>
+                </tr>
+              </thead>
+              <tbody id="zsRefBody04"></tbody>
+            </table>
+          </div>
+
+          <div class="table-wrap" style="margin-top: 0.75rem;">
+            <div class="table-head">
+              <div class="table-label">5s Disconnection (Distribution Circuits)</div>
+              <div class="table-sub">BS 7671 Table 41.4</div>
+            </div>
+            <div class="table-divider"></div>
+            <table class="ref-table" id="zsRefTable5">
+              <thead>
+                <tr>
+                  <th>Rating</th>
+                  <th>Type B</th>
+                  <th>Type C</th>
+                  <th>Type D</th>
+                </tr>
+              </thead>
+              <tbody id="zsRefBody5"></tbody>
+            </table>
+          </div>
+
+          <div class="text-tiny" style="margin-top: 0.55rem;">
+            Values are maximum permitted Zs in ohms (&Omega;). For testing, the measured value should not exceed 80% of these values.
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══ CABLE REFERENCE SECTION ═══ -->
+    <section id="cable-ref" class="section-gap">
+      <div class="section-header">
+        <div class="section-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M4 19.5A2.5 2.5 0 016.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 014 19.5v-15A2.5 2.5 0 016.5 2z"/>
+          </svg>
+        </div>
+        <h2 class="section-title">Cable Reference</h2>
+        <div class="section-line"></div>
+      </div>
+
+      <div class="calc-card">
+        <div class="card-head">
+          <div class="card-title">
+            <svg class="card-title-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>
+            </svg>
+            Current-Carrying Capacity (Copper)
+          </div>
+        </div>
+        <div class="card-desc">
+          Quick-look current ratings for common copper cable types by installation method. Filter to find what you need.
+        </div>
+
+        <div class="cref-filters">
+          <label class="field">
+            <span class="field-label">Cable type</span>
+            <select id="crefCableType" class="select">
+              <option value="all">All types</option>
+              <option value="twin_earth">Twin &amp; Earth</option>
+              <option value="singles">Singles in conduit/trunking</option>
+              <option value="swa">SWA</option>
+            </select>
+          </label>
+          <label class="field">
+            <span class="field-label">Highlight size (mm&sup2;)</span>
+            <select id="crefHighlight" class="select">
+              <option value="">None</option>
+              <option value="1.0">1.0</option>
+              <option value="1.5">1.5</option>
+              <option value="2.5">2.5</option>
+              <option value="4.0">4.0</option>
+              <option value="6.0">6.0</option>
+              <option value="10.0">10.0</option>
+              <option value="16.0">16.0</option>
+            </select>
+          </label>
+        </div>
+
+        <!-- Twin & Earth Table -->
+        <div class="table-wrap" id="crefTableTE">
+          <div class="table-head">
+            <div class="table-label">Twin &amp; Earth (Flat cable with CPC)</div>
+            <div class="table-sub">Copper &mdash; current ratings in amps</div>
+          </div>
+          <div class="table-divider"></div>
+          <table class="ref-table">
+            <thead>
+              <tr>
+                <th>Size (mm&sup2;)</th>
+                <th>Clipped Direct</th>
+                <th>Conduit/Trunk</th>
+                <th>Tray/Surface</th>
+                <th>In Insulation</th>
+              </tr>
+            </thead>
+            <tbody id="crefBodyTE"></tbody>
+          </table>
+        </div>
+
+        <!-- Singles Table -->
+        <div class="table-wrap" id="crefTableSingles" style="margin-top: 0.75rem;">
+          <div class="table-head">
+            <div class="table-label">Singles in Conduit / Trunking</div>
+            <div class="table-sub">Copper &mdash; current ratings in amps</div>
+          </div>
+          <div class="table-divider"></div>
+          <table class="ref-table">
+            <thead>
+              <tr>
+                <th>Size (mm&sup2;)</th>
+                <th>Clipped Direct</th>
+                <th>Conduit/Trunk</th>
+                <th>Tray/Surface</th>
+                <th>In Insulation</th>
+              </tr>
+            </thead>
+            <tbody id="crefBodySingles"></tbody>
+          </table>
+        </div>
+
+        <!-- SWA Table -->
+        <div class="table-wrap" id="crefTableSWA" style="margin-top: 0.75rem;">
+          <div class="table-head">
+            <div class="table-label">SWA (Steel Wire Armoured)</div>
+            <div class="table-sub">Copper &mdash; current ratings in amps</div>
+          </div>
+          <div class="table-divider"></div>
+          <table class="ref-table">
+            <thead>
+              <tr>
+                <th>Size (mm&sup2;)</th>
+                <th>Clipped Direct</th>
+                <th>Conduit/Trunk</th>
+                <th>Tray/Surface</th>
+                <th>In Insulation</th>
+              </tr>
+            </thead>
+            <tbody id="crefBodySWA"></tbody>
+          </table>
+        </div>
+
+        <!-- Voltage Drop Reference -->
+        <div class="table-wrap" style="margin-top: 0.75rem;">
+          <div class="table-head">
+            <div class="table-label">Voltage Drop (mV/A/m)</div>
+            <div class="table-sub">Single-phase &mdash; copper conductors</div>
+          </div>
+          <div class="table-divider"></div>
+          <table class="ref-table">
+            <thead>
+              <tr>
+                <th>Size (mm&sup2;)</th>
+                <th>mV/A/m</th>
+                <th>Max run @ 20 A, 5%</th>
+                <th>Max run @ 32 A, 5%</th>
+              </tr>
+            </thead>
+            <tbody id="crefBodyVD"></tbody>
+          </table>
+        </div>
+
+        <div class="text-tiny" style="margin-top: 0.55rem;">
+          Values are approximate for copper conductors at 70&deg;C operating temperature. Always verify against manufacturer data and current edition of wiring regulations.
         </div>
       </div>
     </section>
@@ -2677,6 +3124,289 @@
 
     // Init
     hideAllResults();
+  })();
+
+  // ── Zs Max Lookup ──────────────────────────────────
+  (function () {
+    function $(id) { return document.getElementById(id); }
+    function parseNum(v) { const s = String(v ?? "").trim().replaceAll(",", ""); if (!s) return null; const n = Number(s); return Number.isFinite(n) ? n : null; }
+    function showMsg(el, msg) { if (!el) return; if (!msg) { el.hidden = true; el.textContent = ""; return; } el.hidden = false; el.textContent = msg; }
+
+    // Zs max tables (ohms) — MCB to BS EN 60898
+    // Key: curve -> time -> rating -> Zs max
+    const ZS_MAX = {
+      B: {
+        0.4: { 6: 7.67, 10: 4.60, 16: 2.87, 20: 2.30, 25: 1.84, 32: 1.44, 40: 1.15, 50: 0.92, 63: 0.73 },
+        5:   { 6: 13.68, 10: 8.21, 16: 5.13, 20: 4.10, 25: 3.28, 32: 2.56, 40: 2.05, 50: 1.64, 63: 1.30 }
+      },
+      C: {
+        0.4: { 6: 3.83, 10: 2.30, 16: 1.44, 20: 1.15, 25: 0.92, 32: 0.72, 40: 0.57, 50: 0.46, 63: 0.36 },
+        5:   { 6: 7.67, 10: 4.60, 16: 2.87, 20: 2.30, 25: 1.84, 32: 1.44, 40: 1.15, 50: 0.92, 63: 0.73 }
+      },
+      D: {
+        0.4: { 6: 1.92, 10: 1.15, 16: 0.72, 20: 0.57, 25: 0.46, 32: 0.36, 40: 0.29, 50: 0.23, 63: 0.18 },
+        5:   { 6: 3.83, 10: 2.30, 16: 1.44, 20: 1.15, 25: 0.92, 32: 0.72, 40: 0.57, 50: 0.46, 63: 0.36 }
+      }
+    };
+
+    const RATINGS = [6, 10, 16, 20, 25, 32, 40, 50, 63];
+
+    // Populate reference tables
+    function buildRefTables() {
+      const body04 = $("zsRefBody04");
+      const body5 = $("zsRefBody5");
+      if (!body04 || !body5) return;
+      for (const r of RATINGS) {
+        const row04 = document.createElement("tr");
+        row04.innerHTML = "<td>" + r + " A</td>" +
+          "<td>" + (ZS_MAX.B[0.4][r] ?? "\u2014") + "</td>" +
+          "<td>" + (ZS_MAX.C[0.4][r] ?? "\u2014") + "</td>" +
+          "<td>" + (ZS_MAX.D[0.4][r] ?? "\u2014") + "</td>";
+        body04.appendChild(row04);
+
+        const row5 = document.createElement("tr");
+        row5.innerHTML = "<td>" + r + " A</td>" +
+          "<td>" + (ZS_MAX.B[5][r] ?? "\u2014") + "</td>" +
+          "<td>" + (ZS_MAX.C[5][r] ?? "\u2014") + "</td>" +
+          "<td>" + (ZS_MAX.D[5][r] ?? "\u2014") + "</td>";
+        body5.appendChild(row5);
+      }
+    }
+    buildRefTables();
+
+    const device = $("zsDevice"), curve = $("zsCurve"), rating = $("zsRating");
+    const time = $("zsTime"), measured = $("zsMeasured");
+    const msg = $("zsMsg"), outMax = $("zsOutMax"), out80 = $("zsOut80");
+    const verdict = $("zsVerdict"), verdictText = $("zsVerdictText"), verdictDetail = $("zsVerdictDetail");
+    const clearBtn = $("zsClear");
+
+    function solve() {
+      showMsg(msg, "");
+      const c = curve.value, t = Number(time.value), r = Number(rating.value);
+      const zsMax = ZS_MAX[c]?.[t]?.[r];
+      if (zsMax == null) {
+        outMax.textContent = "\u2014"; out80.textContent = "\u2014";
+        verdict.style.display = "none";
+        return;
+      }
+      const zs80 = +(zsMax * 0.8).toFixed(2);
+      outMax.textContent = zsMax.toFixed(2) + " \u03A9";
+      out80.textContent = zs80.toFixed(2) + " \u03A9";
+
+      const meas = parseNum(measured.value);
+      if (meas === null) { verdict.style.display = "none"; return; }
+      verdict.style.display = "";
+
+      if (meas <= zs80) {
+        verdict.className = "zs-result-big pass";
+        verdictText.textContent = "PASS \u2014 " + meas.toFixed(2) + " \u03A9";
+        verdictDetail.textContent = "Measured Zs is within 80% of max (" + zs80.toFixed(2) + " \u03A9). Disconnection within " + t + "s confirmed.";
+      } else if (meas <= zsMax) {
+        verdict.className = "zs-result-big pass";
+        verdictText.textContent = "MARGINAL PASS \u2014 " + meas.toFixed(2) + " \u03A9";
+        verdictDetail.textContent = "Within tabulated max (" + zsMax.toFixed(2) + " \u03A9) but exceeds 80% rule (" + zs80.toFixed(2) + " \u03A9). May fail under fault temperature conditions.";
+      } else {
+        verdict.className = "zs-result-big fail";
+        verdictText.textContent = "FAIL \u2014 " + meas.toFixed(2) + " \u03A9";
+        verdictDetail.textContent = "Exceeds maximum Zs of " + zsMax.toFixed(2) + " \u03A9 for " + r + " A Type " + c + " at " + t + "s. Disconnection not guaranteed.";
+      }
+    }
+
+    function clearAll() {
+      curve.value = "B"; rating.value = "6"; time.value = "0.4"; measured.value = ""; device.value = "mcb";
+      solve();
+    }
+
+    for (const el of [device, curve, rating, time, measured]) { el?.addEventListener("input", solve); el?.addEventListener("change", solve); }
+    clearBtn?.addEventListener("click", clearAll);
+    solve();
+  })();
+
+  // ── Disconnection Time / Fault Loop Calculator ────
+  (function () {
+    function $(id) { return document.getElementById(id); }
+    function parseNum(v) { const s = String(v ?? "").trim().replaceAll(",", ""); if (!s) return null; const n = Number(s); return Number.isFinite(n) ? n : null; }
+    function showMsg(el, msg) { if (!el) return; if (!msg) { el.hidden = true; el.textContent = ""; return; } el.hidden = false; el.textContent = msg; }
+    function fmt(n, dp, unit) { if (n === null || !Number.isFinite(n)) return "\u2014"; return n.toFixed(dp) + (unit ? " " + unit : ""); }
+
+    // Instantaneous trip multiples (magnetic trip threshold)
+    const TRIP_MULT = { B: 5, C: 10, D: 20 };
+    // For 5s disconnection, thermal trip is lower
+    const TRIP_MULT_5S = { B: 3, C: 5, D: 10 };
+
+    // Zs max table (same as Zs lookup)
+    const ZS_MAX = {
+      B: { 0.4: { 6:7.67,10:4.60,16:2.87,20:2.30,25:1.84,32:1.44,40:1.15,50:0.92,63:0.73 }, 5: { 6:13.68,10:8.21,16:5.13,20:4.10,25:3.28,32:2.56,40:2.05,50:1.64,63:1.30 } },
+      C: { 0.4: { 6:3.83,10:2.30,16:1.44,20:1.15,25:0.92,32:0.72,40:0.57,50:0.46,63:0.36 }, 5: { 6:7.67,10:4.60,16:2.87,20:2.30,25:1.84,32:1.44,40:1.15,50:0.92,63:0.73 } },
+      D: { 0.4: { 6:1.92,10:1.15,16:0.72,20:0.57,25:0.46,32:0.36,40:0.29,50:0.23,63:0.18 }, 5: { 6:3.83,10:2.30,16:1.44,20:1.15,25:0.92,32:0.72,40:0.57,50:0.46,63:0.36 } }
+    };
+
+    const voltage = $("dtVoltage"), zs = $("dtZs"), device = $("dtDevice");
+    const curve = $("dtCurve"), rating = $("dtRating"), time = $("dtTime");
+    const msg = $("dtMsg");
+    const outIpf = $("dtOutIpf"), outReq04 = $("dtOutReq04"), outReq5 = $("dtOutReq5"), outZsMax = $("dtOutZsMax");
+    const verdict = $("dtVerdict"), verdictText = $("dtVerdictText"), verdictDetail = $("dtVerdictDetail");
+    const clearBtn = $("dtClear");
+
+    function solve() {
+      showMsg(msg, "");
+      const V = parseNum(voltage.value);
+      const zsVal = parseNum(zs.value);
+      const c = curve.value, r = Number(rating.value), t = Number(time.value);
+
+      outIpf.textContent = "\u2014"; outReq04.textContent = "\u2014"; outReq5.textContent = "\u2014"; outZsMax.textContent = "\u2014";
+      verdict.style.display = "none";
+
+      if (V === null || V <= 0) return;
+
+      // Show required fault currents regardless of Zs input
+      const req04 = r * TRIP_MULT[c];
+      const req5 = r * TRIP_MULT_5S[c];
+      outReq04.textContent = fmt(req04, 0, "A");
+      outReq5.textContent = fmt(req5, 0, "A");
+
+      const zsMax = ZS_MAX[c]?.[t]?.[r];
+      if (zsMax != null) outZsMax.textContent = zsMax.toFixed(2) + " \u03A9";
+
+      if (zsVal === null || zsVal <= 0) return;
+
+      const ipf = V / zsVal;
+      outIpf.textContent = fmt(ipf, 1, "A");
+
+      const reqCurrent = t <= 0.4 ? req04 : req5;
+      verdict.style.display = "";
+
+      if (ipf >= reqCurrent) {
+        verdict.className = "zs-result-big pass";
+        verdictText.textContent = "PASS \u2014 " + fmt(ipf, 1, "A") + " fault current";
+        verdictDetail.textContent = "Ipf (" + fmt(ipf, 1, "A") + ") exceeds " + reqCurrent + " A required for " + t + "s disconnection of " + r + " A Type " + c + ". ";
+        if (zsMax != null) {
+          const zs80 = zsMax * 0.8;
+          if (zsVal > zs80) {
+            verdictDetail.textContent += "Note: Zs (" + zsVal.toFixed(2) + " \u03A9) exceeds 80% of max (" + zs80.toFixed(2) + " \u03A9) \u2014 marginal.";
+          }
+        }
+      } else {
+        verdict.className = "zs-result-big fail";
+        verdictText.textContent = "FAIL \u2014 " + fmt(ipf, 1, "A") + " fault current";
+        verdictDetail.textContent = "Ipf (" + fmt(ipf, 1, "A") + ") is below " + reqCurrent + " A needed for " + t + "s disconnection of " + r + " A Type " + c + ". Circuit does not meet disconnection requirements.";
+      }
+    }
+
+    function clearAll() {
+      voltage.value = "230"; zs.value = ""; device.value = "mcb"; curve.value = "B"; rating.value = "6"; time.value = "0.4";
+      solve();
+    }
+
+    for (const el of [voltage, zs, device, curve, rating, time]) { el?.addEventListener("input", solve); el?.addEventListener("change", solve); }
+    clearBtn?.addEventListener("click", clearAll);
+    solve();
+  })();
+
+  // ── Cable Reference Tables ────────────────────────
+  (function () {
+    function $(id) { return document.getElementById(id); }
+
+    // Current-carrying capacity tables (same data as Circuit Sizing)
+    // [clipped_direct, conduit_in_wall, tray_surface, buried_in_insulation]
+    const TABLES = {
+      twin_earth: {
+        sizes: [1.0, 1.5, 2.5, 4.0, 6.0, 10.0, 16.0],
+        data: {
+          1.0:  [11, 10, 11, 7],
+          1.5:  [14, 13, 14, 9],
+          2.5:  [20, 18, 20, 13],
+          4.0:  [26, 24, 26, 17],
+          6.0:  [32, 30, 32, 21],
+          10.0: [44, 40, 44, 29],
+          16.0: [57, 52, 57, 38]
+        }
+      },
+      singles: {
+        sizes: [1.0, 1.5, 2.5, 4.0, 6.0, 10.0, 16.0],
+        data: {
+          1.0:  [13, 12, 14, 8],
+          1.5:  [16, 15, 17, 10],
+          2.5:  [23, 21, 24, 15],
+          4.0:  [30, 28, 32, 20],
+          6.0:  [38, 35, 40, 25],
+          10.0: [52, 48, 54, 34],
+          16.0: [69, 63, 73, 46]
+        }
+      },
+      swa: {
+        sizes: [1.5, 2.5, 4.0, 6.0, 10.0, 16.0],
+        data: {
+          1.5:  [18, 16, 19, 12],
+          2.5:  [25, 23, 26, 17],
+          4.0:  [33, 30, 34, 22],
+          6.0:  [42, 38, 43, 27],
+          10.0: [57, 52, 58, 37],
+          16.0: [76, 69, 77, 49]
+        }
+      }
+    };
+
+    // Voltage drop mV/A/m
+    const VD_MVA = { 1.0: 44, 1.5: 29, 2.5: 18, 4.0: 11, 6.0: 7.3, 10.0: 4.4, 16.0: 2.8 };
+    const VD_SIZES = [1.0, 1.5, 2.5, 4.0, 6.0, 10.0, 16.0];
+
+    function buildTable(bodyId, tableKey) {
+      const body = $(bodyId);
+      if (!body) return;
+      const t = TABLES[tableKey];
+      body.innerHTML = "";
+      for (const size of t.sizes) {
+        const d = t.data[size];
+        const row = document.createElement("tr");
+        row.dataset.size = size;
+        row.innerHTML = "<td>" + size + "</td><td>" + d[0] + "</td><td>" + d[1] + "</td><td>" + d[2] + "</td><td>" + d[3] + "</td>";
+        body.appendChild(row);
+      }
+    }
+
+    function buildVdTable() {
+      const body = $("crefBodyVD");
+      if (!body) return;
+      body.innerHTML = "";
+      for (const size of VD_SIZES) {
+        const mv = VD_MVA[size];
+        // Max run = (allowed drop V) / (mV/A/m * current / 1000)
+        // allowed drop at 230V, 5% = 11.5V
+        const maxRun20 = (11.5 / (mv * 20)) * 1000;
+        const maxRun32 = (11.5 / (mv * 32)) * 1000;
+        const row = document.createElement("tr");
+        row.dataset.size = size;
+        row.innerHTML = "<td>" + size + "</td><td>" + mv + "</td><td>" + Math.floor(maxRun20) + " m</td><td>" + Math.floor(maxRun32) + " m</td>";
+        body.appendChild(row);
+      }
+    }
+
+    buildTable("crefBodyTE", "twin_earth");
+    buildTable("crefBodySingles", "singles");
+    buildTable("crefBodySWA", "swa");
+    buildVdTable();
+
+    // Filter logic
+    const cableTypeFilter = $("crefCableType");
+    const highlightFilter = $("crefHighlight");
+
+    function applyFilters() {
+      const type = cableTypeFilter.value;
+      $("crefTableTE").style.display = (type === "all" || type === "twin_earth") ? "" : "none";
+      $("crefTableSingles").style.display = (type === "all" || type === "singles") ? "" : "none";
+      $("crefTableSWA").style.display = (type === "all" || type === "swa") ? "" : "none";
+
+      // Highlight
+      const hl = highlightFilter.value;
+      document.querySelectorAll("#cable-ref tbody tr").forEach(row => {
+        row.classList.toggle("cref-highlight", hl !== "" && row.dataset.size === hl);
+      });
+    }
+
+    cableTypeFilter?.addEventListener("change", applyFilters);
+    highlightFilter?.addEventListener("change", applyFilters);
+    applyFilters();
   })();
 
   // ── Active nav highlight on scroll ──────────────────
