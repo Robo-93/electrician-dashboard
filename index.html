@@ -2285,6 +2285,64 @@
           <div class="uc-result" id="ucResult">&mdash;</div>
         </div>
       </div>
+
+      <div class="calc-grid-2" style="margin-top:1.25rem">
+
+        <!-- ── I²R Cable Losses ── -->
+        <div class="calc-card">
+          <div class="card-head">
+            <div class="card-title">
+              <svg class="card-title-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/>
+              </svg>
+              I&sup2;R Cable Losses
+            </div>
+            <button id="i2rClear" class="btn-clear" type="button">Clear</button>
+          </div>
+          <div class="card-desc">Power lost as heat in a cable run. Enter current and loop resistance directly, or use the cable helper to auto-fill R from mΩ/m and run length.</div>
+
+          <div class="input-grid">
+            <label class="field">
+              <span class="field-label">Current I (A)</span>
+              <input id="i2rCurrent" class="input" inputmode="decimal" placeholder="e.g. 16">
+            </label>
+            <label class="field">
+              <span class="field-label">Loop resistance R (&Omega;)</span>
+              <input id="i2rR" class="input" inputmode="decimal" placeholder="e.g. 0.52">
+            </label>
+          </div>
+
+          <div class="text-tiny" style="margin: 0.6rem 0 0.3rem; color: var(--text-dim);">Cable helper &mdash; calculates loop R (2&times; one-way) and fills above:</div>
+          <div class="input-grid">
+            <label class="field">
+              <span class="field-label">Conductor resistance (m&Omega;/m)</span>
+              <input id="i2rMohm" class="input" inputmode="decimal" placeholder="e.g. 7.41 for 2.5 mm&sup2;">
+            </label>
+            <label class="field">
+              <span class="field-label">One-way length (m)</span>
+              <input id="i2rLen" class="input" inputmode="decimal" placeholder="e.g. 25">
+            </label>
+          </div>
+
+          <div id="i2rMsg" class="error-banner" hidden></div>
+
+          <div class="readout" style="margin-top:0.85rem">
+            <div class="readout-head">
+              <div class="readout-label">Cable Losses</div>
+              <div class="readout-sub" id="i2rSub">&mdash;</div>
+            </div>
+            <div class="readout-divider"></div>
+            <div class="readout-grid-wide">
+              <div class="readout-row"><span class="readout-key">Power loss (I&sup2;R)</span><span class="readout-val" id="i2rOutP">&mdash;</span></div>
+              <div class="readout-row"><span class="readout-key">Voltage drop (I&times;R)</span><span class="readout-val" id="i2rOutVd">&mdash;</span></div>
+              <div class="readout-row"><span class="readout-key">VD as % of 230 V</span><span class="readout-val" id="i2rOutPct">&mdash;</span></div>
+            </div>
+          </div>
+
+          <div class="text-tiny" style="margin-top: 0.55rem;">Typical copper resistances (at 20&deg;C): 1.5 mm&sup2; &mdash; 12.1 m&Omega;/m &nbsp;&bull;&nbsp; 2.5 mm&sup2; &mdash; 7.41 m&Omega;/m &nbsp;&bull;&nbsp; 4 mm&sup2; &mdash; 4.61 m&Omega;/m &nbsp;&bull;&nbsp; 6 mm&sup2; &mdash; 3.08 m&Omega;/m &nbsp;&bull;&nbsp; 10 mm&sup2; &mdash; 1.83 m&Omega;/m</div>
+        </div>
+
+      </div>
     </section>
 
     <!-- ═══ REFERENCE SECTION ═══ -->
@@ -4065,6 +4123,60 @@
     fromSel?.addEventListener("change", solve);
     value?.addEventListener("input", solve);
     populateFrom();
+  })();
+
+  // ── I²R Cable Losses ─────────────────────────────
+  (function () {
+    function $(id) { return document.getElementById(id); }
+    function parseNum(v) { const s = String(v ?? "").trim().replaceAll(",", ""); if (!s) return null; const n = Number(s); return Number.isFinite(n) ? n : null; }
+    function showMsg(el, msg) { if (!el) return; if (!msg) { el.hidden = true; el.textContent = ""; return; } el.hidden = false; el.textContent = msg; }
+
+    const iIn = $("i2rCurrent"), rIn = $("i2rR"), mohmIn = $("i2rMohm"), lenIn = $("i2rLen");
+    const outP = $("i2rOutP"), outVd = $("i2rOutVd"), outPct = $("i2rOutPct"), sub = $("i2rSub"), msgEl = $("i2rMsg");
+
+    function solve() {
+      const mohm = parseNum(mohmIn?.value);
+      const len = parseNum(lenIn?.value);
+      if (mohm !== null && len !== null && mohm >= 0 && len >= 0) {
+        const rCalc = (mohm * len * 2) / 1000;
+        if (rIn) rIn.value = rCalc.toFixed(4);
+      }
+
+      const I = parseNum(iIn?.value);
+      const R = parseNum(rIn?.value);
+
+      if (I === null && R === null) {
+        showMsg(msgEl, "");
+        outP.textContent = "\u2014"; outVd.textContent = "\u2014"; outPct.textContent = "\u2014"; sub.textContent = "\u2014";
+        return;
+      }
+      if (I === null) { showMsg(msgEl, "Enter current (A)."); return; }
+      if (R === null) { showMsg(msgEl, "Enter loop resistance (\u03A9)."); return; }
+      if (I < 0) { showMsg(msgEl, "Current must be positive."); return; }
+      if (R < 0) { showMsg(msgEl, "Resistance must be positive."); return; }
+      showMsg(msgEl, "");
+
+      const P = I * I * R;
+      const Vd = I * R;
+      const pct = (Vd / 230) * 100;
+
+      outP.textContent = P >= 1000 ? (P / 1000).toFixed(3) + " kW" : P.toFixed(2) + " W";
+      outVd.textContent = Vd.toFixed(3) + " V";
+      outPct.textContent = pct.toFixed(2) + " %";
+      sub.textContent = "I = " + I + " A, R = " + R + " \u03A9";
+    }
+
+    function clear() {
+      if (iIn) iIn.value = "";
+      if (rIn) rIn.value = "";
+      if (mohmIn) mohmIn.value = "";
+      if (lenIn) lenIn.value = "";
+      solve();
+    }
+
+    for (const el of [iIn, rIn, mohmIn, lenIn]) el?.addEventListener("input", solve);
+    $("i2rClear")?.addEventListener("click", clear);
+    solve();
   })();
 
   // ── IP Rating Decoder ─────────────────────────────
